@@ -6,9 +6,12 @@ public class IceWall : MonoBehaviour
     public KeyCode[] keySequence; // Secuencia de teclas para sincronizar pasos
     public float stepTimeLimit = 2f; // Tiempo límite para cada paso
     private int currentStep = 0; // Paso actual en la secuencia
+    private PlayerFlight playerFlight; // Referencia al PlayerFlight para comunicación
 
-    public void StartStepSequence()
+    // Método para inicializar la secuencia, recibe el script PlayerFlight
+    public void StartStepSequence(PlayerFlight player)
     {
+        playerFlight = player;
         StartCoroutine(HandleStepSequence());
     }
 
@@ -40,11 +43,14 @@ public class IceWall : MonoBehaviour
             }
             else
             {
-                Debug.Log("Fallo en la secuencia. Reiniciando...");
-                currentStep = 0; // Reinicia la secuencia si falla
+                Debug.Log("Fallo en la secuencia. Aplicando penalización.");
+                playerFlight.FailSequence(); // Llama a la penalización en PlayerFlight
+                yield break;
             }
         }
 
         Debug.Log("¡Secuencia completada!");
+        GetComponent<Collider>().isTrigger = true; // Activa Is Trigger para que el jugador pase
+        playerFlight.CompleteSequence(); // Llama a completar el vuelo en PlayerFlight
     }
 }
