@@ -273,7 +273,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 235087942986018898, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
       propertyPath: m_Name
-      value: FlightTrigger (2)
+      value: FlightTrigger 4c
       objectReference: {fileID: 0}
     - target: {fileID: 4358747669224609192, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
       propertyPath: m_LocalScale.x
@@ -667,7 +667,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7133956411719427855, guid: b0f68d2b51c46f842a0ee484de591f12, type: 3}
       propertyPath: m_Name
-      value: IceWall (6)
+      value: IceWall 4b
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3805001984750329210, guid: b0f68d2b51c46f842a0ee484de591f12, type: 3}
@@ -1321,7 +1321,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7133956411719427855, guid: b0f68d2b51c46f842a0ee484de591f12, type: 3}
       propertyPath: m_Name
-      value: IceWall (2)
+      value: IceWall 4c
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3805001984750329210, guid: b0f68d2b51c46f842a0ee484de591f12, type: 3}
@@ -1646,6 +1646,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 003d6fd709f740a479a692e3ec48e1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  penalizedSpeed: 3
+  penalizationDuration: 2
 --- !u!1 &330256885
 GameObject:
   m_ObjectHideFlags: 0
@@ -2222,7 +2224,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 235087942986018898, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
       propertyPath: m_Name
-      value: FlightTrigger (6)
+      value: FlightTrigger 4b
       objectReference: {fileID: 0}
     - target: {fileID: 4358747669224609192, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
       propertyPath: m_LocalScale.x
@@ -2464,12 +2466,12 @@ Transform:
   m_LocalScale: {x: 8, y: 0.5, z: 50}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1034420060}
+  - {fileID: 1489196931}
+  - {fileID: 2126623746}
+  - {fileID: 1862030763}
   - {fileID: 688844338}
   - {fileID: 726765864}
-  - {fileID: 1489196931}
-  - {fileID: 1862030763}
-  - {fileID: 1034420060}
-  - {fileID: 2126623746}
   - {fileID: 1497780449}
   m_Father: {fileID: 33073531}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2839,7 +2841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7133956411719427855, guid: b0f68d2b51c46f842a0ee484de591f12, type: 3}
       propertyPath: m_Name
-      value: IceWall (5)
+      value: IceWall 4
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3805001984750329210, guid: b0f68d2b51c46f842a0ee484de591f12, type: 3}
@@ -2960,7 +2962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7133956411719427855, guid: b0f68d2b51c46f842a0ee484de591f12, type: 3}
       propertyPath: m_Name
-      value: IceWall (2)
+      value: IceWall 2b
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3805001984750329210, guid: b0f68d2b51c46f842a0ee484de591f12, type: 3}
@@ -3127,7 +3129,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 235087942986018898, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
       propertyPath: m_Name
-      value: FlightTrigger (1)
+      value: FlightTrigger 3c
       objectReference: {fileID: 0}
     - target: {fileID: 4358747669224609192, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
       propertyPath: m_LocalScale.x
@@ -3277,7 +3279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7133956411719427855, guid: b0f68d2b51c46f842a0ee484de591f12, type: 3}
       propertyPath: m_Name
-      value: IceWall (1)
+      value: IceWall 3c
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3805001984750329210, guid: b0f68d2b51c46f842a0ee484de591f12, type: 3}
@@ -3469,7 +3471,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 235087942986018898, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
       propertyPath: m_Name
-      value: FlightTrigger (5)
+      value: FlightTrigger 4
       objectReference: {fileID: 0}
     - target: {fileID: 4358747669224609192, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
       propertyPath: m_LocalScale.x
@@ -3985,7 +3987,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7133956411719427855, guid: b0f68d2b51c46f842a0ee484de591f12, type: 3}
       propertyPath: m_Name
-      value: IceWall (3)
+      value: IceWall 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3805001984750329210, guid: b0f68d2b51c46f842a0ee484de591f12, type: 3}
@@ -4310,6 +4312,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 003d6fd709f740a479a692e3ec48e1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  penalizedSpeed: 3
+  penalizationDuration: 2
 --- !u!1 &1125378779
 GameObject:
   m_ObjectHideFlags: 0
@@ -4711,8 +4715,8 @@ Transform:
   m_Children:
   - {fileID: 152969805}
   - {fileID: 1408827967}
-  - {fileID: 1743684561}
   - {fileID: 1903139537}
+  - {fileID: 1743684561}
   - {fileID: 626245568}
   m_Father: {fileID: 33073531}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5109,12 +5113,12 @@ Transform:
   m_LocalScale: {x: 8, y: 0.5, z: 50}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 869373043}
+  - {fileID: 606534452}
+  - {fileID: 475268702}
+  - {fileID: 89451686}
   - {fileID: 45017362}
   - {fileID: 289568618}
-  - {fileID: 869373043}
-  - {fileID: 475268702}
-  - {fileID: 606534452}
-  - {fileID: 89451686}
   - {fileID: 1701884978}
   - {fileID: 1775064829}
   m_Father: {fileID: 33073531}
@@ -5359,7 +5363,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 235087942986018898, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
       propertyPath: m_Name
-      value: FlightTrigger (1)
+      value: FlightTrigger 2
       objectReference: {fileID: 0}
     - target: {fileID: 4358747669224609192, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
       propertyPath: m_LocalScale.x
@@ -5457,7 +5461,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 235087942986018898, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
       propertyPath: m_Name
-      value: FlightTrigger (3)
+      value: FlightTrigger 3
       objectReference: {fileID: 0}
     - target: {fileID: 4358747669224609192, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
       propertyPath: m_LocalScale.x
@@ -5518,7 +5522,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 235087942986018898, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1489196933}
+      addedObject: {fileID: 1489196937}
   m_SourcePrefab: {fileID: 100100000, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
 --- !u!4 &1489196931 stripped
 Transform:
@@ -5530,7 +5534,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 235087942986018898, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
   m_PrefabInstance: {fileID: 1489196930}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1489196933
+--- !u!114 &1489196937
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6142,7 +6146,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 235087942986018898, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
       propertyPath: m_Name
-      value: FlightTrigger (2)
+      value: FlightTrigger 2b
       objectReference: {fileID: 0}
     - target: {fileID: 4358747669224609192, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
       propertyPath: m_LocalScale.x
@@ -6529,7 +6533,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 235087942986018898, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
       propertyPath: m_Name
-      value: FlightTrigger (4)
+      value: FlightTrigger 3b
       objectReference: {fileID: 0}
     - target: {fileID: 4358747669224609192, guid: 1645ef11c8b921141ac2e52fde5ff792, type: 3}
       propertyPath: m_LocalScale.x
@@ -6923,7 +6927,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7133956411719427855, guid: b0f68d2b51c46f842a0ee484de591f12, type: 3}
       propertyPath: m_Name
-      value: IceWall (1)
+      value: IceWall 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3805001984750329210, guid: b0f68d2b51c46f842a0ee484de591f12, type: 3}
@@ -7386,7 +7390,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7133956411719427855, guid: b0f68d2b51c46f842a0ee484de591f12, type: 3}
       propertyPath: m_Name
-      value: IceWall (4)
+      value: IceWall 3b
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3805001984750329210, guid: b0f68d2b51c46f842a0ee484de591f12, type: 3}
