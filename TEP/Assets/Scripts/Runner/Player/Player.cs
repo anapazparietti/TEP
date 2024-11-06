@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float speed;  // Velocidad del movimiento controlado
+    [SerializeField] public float speed;  // Velocidad del movimiento controlado
     [SerializeField] private float forwardSpeed;  // Velocidad del movimiento automático hacia adelante
     [SerializeField] private string inputNameHorizontal;
 
