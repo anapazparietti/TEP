@@ -443,10 +443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a4ae534ae0e3af498072211c07bd096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
+  speed: 3
   inputNameHorizontal: Horizontal 1
-  inputNameVertical: Vertical 1
-  color: {r: 1, g: 0.07450981, b: 0.5803922, a: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,10 +850,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a4ae534ae0e3af498072211c07bd096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
+  speed: 3
   inputNameHorizontal: Horizontal 2
-  inputNameVertical: Vertical 2
-  color: {r: 0.3137255, g: 1, b: 0, a: 0}
 --- !u!54 &1058665561
 Rigidbody:
   m_ObjectHideFlags: 0

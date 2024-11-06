@@ -7,31 +7,24 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private string inputNameHorizontal;
-    [SerializeField] private string inputNameVertical;
-
-    [SerializeField] private Color color;
 
     private Rigidbody rb;
-    private Renderer renderer;
 
     private float inputHorizontal;
-    private float inputVertical;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        renderer = GetComponentInChildren<Renderer>();
-        renderer.material.color = color;
     }
 
     private void Update()
     {
         inputHorizontal = Input.GetAxisRaw(inputNameHorizontal);
-        inputVertical = Input.GetAxisRaw(inputNameVertical);
+        transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.World);
     }
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector3(inputHorizontal * speed * Time.fixedDeltaTime, rb.linearVelocity.y, inputVertical * speed * Time.fixedDeltaTime);
+        rb.linearVelocity = new Vector3(inputHorizontal * speed * Time.fixedDeltaTime, rb.linearVelocity.y, 0);
     }
 }
