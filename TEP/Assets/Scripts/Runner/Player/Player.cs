@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     {
         // Captura la entrada horizontal del usuario
         inputHorizontal = Input.GetAxisRaw(inputNameHorizontal);
+        transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.World);
     }
 
     private void FixedUpdate()
