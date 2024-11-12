@@ -3,60 +3,76 @@ using UnityEngine;
 
 public class PlayerFlight : MonoBehaviour
 {
-    private Vector3 originalPosition; // Para guardar la posición original en la pista
-    private bool isFlying = false; // Estado de vuelo del jugador
-    private GameObject iceWallInstance; // Instancia del muro de hielo
+    private Vector3 originalPosition;
+    private bool isFlying = false;
+    private GameObject iceWallInstance;
 
-    [Header("Penalización de velocidad")]
-    public float penalizedSpeed = 3f; // Velocidad cuando el jugador falla la secuencia
-    public float penalizationDuration = 2f; // Duración de la penalización en segundos
-    private float originalSpeed; // Para almacenar la velocidad original del jugador
-    private Player playerScript; // Referencia al script del jugador
+    [Header("Configuración de Vuelo")]
+    public float flightForwardDistance = 10f;
+    [SerializeField] private GameObject syncPlatform;
+
+    [Header("Penalización de Velocidad")]
+    public float penalizedSpeed = 3f;
+    public float penalizationDuration = 2f;
+    private float originalSpeed;
+    private Player playerScript;
 
     private void Start()
     {
         playerScript = GetComponent<Player>();
-        originalSpeed = playerScript.speed; // Guarda la velocidad original del jugador
+        originalSpeed = playerScript.speed;
     }
 
-    public void StartFlight(float skyHeight, float flightDuration, GameObject iceWallPrefab)
+    public void StartFlight(float verticalBoost, float flightDuration)
     {
-        if (isFlying) return; // Evita múltiples activaciones
+        if (isFlying) return;
         isFlying = true;
 
-        // Guarda la posición original y eleva al jugador al cielo
         originalPosition = transform.position;
-        transform.position = new Vector3(transform.position.x, skyHeight, transform.position.z);
-
-        // Instancia el muro de hielo y activa la secuencia de pasos
-        ShowIceWall(iceWallPrefab);
+        StartCoroutine(FlyToSyncPlatform(verticalBoost, flightDuration));
     }
 
-    private void ShowIceWall(GameObject iceWallPrefab)
+   private IEnumerator FlyToSyncPlatform(float verticalBoost, float duration)
+{
+    Vector3 targetPosition = syncPlatform != null ? syncPlatform.transform.position : new Vector3(0, 38.26f, 0);
+    
+    // Mueve al jugador hasta que esté muy cerca de la plataforma de sincronización
+    while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
     {
-        if (iceWallPrefab != null)
-        {
-            // Coloca el muro en el aire frente al jugador
-            Vector3 wallPosition = new Vector3(transform.position.x + 10, transform.position.y, transform.position.z);
-            iceWallInstance = Instantiate(iceWallPrefab, wallPosition, Quaternion.identity);
-
-            // Inicia la secuencia de pasos en el muro
-            IceWall iceWall = iceWallInstance.GetComponent<IceWall>();
-            if (iceWall != null)
-            {
-                iceWall.StartStepSequence(this); // Pasa una referencia de PlayerFlight a IceWall
-            }
-        }
+        // Mueve al jugador hacia la posición objetivo a una velocidad constante
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, verticalBoost * Time.deltaTime);
+        yield return null;
     }
 
-    // Método que se llama desde IceWall al completar la secuencia correctamente
+    // Cambia al estado de sincronización y ajusta al jugador en la plataforma
+    StateManager.Instance.ChangeState(StateManager.GameState.Syncing);
+    PlaceOnSyncPlatform();
+
+    // Inicia el tiempo en sincronización (ajusta el tiempo según lo necesario)
+    StartCoroutine(SyncingDuration(5f)); // 5 segundos en sincronización, ajusta según necesidad
+}
+
+private void PlaceOnSyncPlatform()
+{
+    if (syncPlatform != null)
+    {
+        transform.position = syncPlatform.transform.position;
+        // Asegúrate de que el jugador mire hacia el muro en la dirección deseada (ajusta la posición en Z si es necesario)
+        transform.LookAt(new Vector3(syncPlatform.transform.position.x, syncPlatform.transform.position.y, syncPlatform.transform.position.z + 1));
+    }
+}
+private IEnumerator SyncingDuration(float syncDuration)
+{
+    yield return new WaitForSeconds(syncDuration);
+    EndFlight(); // Finaliza el estado de sincronización y baja al jugador
+}
+
     public void CompleteSequence()
     {
         Debug.Log("Secuencia completada correctamente. Continuando vuelo.");
-        EndFlight(); // Termina el vuelo normalmente
+        EndFlight();
     }
 
-    // Método que se llama desde IceWall al fallar la secuencia
     public void FailSequence()
     {
         Debug.Log("Secuencia fallida. Aplicando penalización.");
@@ -65,18 +81,17 @@ public class PlayerFlight : MonoBehaviour
 
     private IEnumerator ApplyPenalization()
     {
-        playerScript.speed = penalizedSpeed; // Reduce la velocidad
-        yield return new WaitForSeconds(penalizationDuration); // Espera el tiempo de penalización
-        playerScript.speed = originalSpeed; // Restaura la velocidad original
-        EndFlight(); // Baja al jugador a la pista
+        playerScript.speed = penalizedSpeed;
+        yield return new WaitForSeconds(penalizationDuration);
+        playerScript.speed = originalSpeed;
+        EndFlight();
     }
 
     private void EndFlight()
     {
         isFlying = false;
-        transform.position = originalPosition; // Devuelve al jugador a la pista
+        transform.position = originalPosition;
 
-        // Destruye el muro de hielo si existe
         if (iceWallInstance != null)
         {
             Destroy(iceWallInstance);
