@@ -21,7 +21,8 @@ public class StateManager : MonoBehaviour
     public event Action<GameState, GameState> OnGameStateChanged;
 
     // Estado actual del juego
-    private GameState currentState = GameState.MainMenu;
+    // private GameState currentState = GameState.MainMenu;
+     private GameState currentState = GameState.Running;
 
     private void Awake()
     {
