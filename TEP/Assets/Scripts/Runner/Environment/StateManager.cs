@@ -18,10 +18,10 @@ public class StateManager : MonoBehaviour
     public static StateManager Instance { get; private set; }
 
     // Evento que se lanza cuando el estado cambia
-    public event Action GameStateChanged;
+    public event Action<GameState, GameState> OnGameStateChanged;
 
     // Estado actual del juego
-    private GameState currentState;
+    private GameState currentState = GameState.MainMenu;
 
     private void Awake()
     {
@@ -42,14 +42,11 @@ public class StateManager : MonoBehaviour
     {
         if (currentState == newState) return;
 
+        GameState previousState = currentState;
         currentState = newState;
-        OnGameStateChanged();
-    }
 
-    // Invocar el evento de cambio de estado
-    protected virtual void OnGameStateChanged()
-    {
-        GameStateChanged?.Invoke(); // Invocar el evento sin parámetros adicionales
+        // Invocar el evento con el estado anterior y el nuevo estado
+        OnGameStateChanged?.Invoke(previousState, newState);
     }
 
     // Método público para obtener el estado actual del juego
