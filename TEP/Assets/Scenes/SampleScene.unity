@@ -1534,7 +1534,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1121372959}
+  m_Mesh: {fileID: 761116066}
 --- !u!33 &240434607
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -2425,6 +2425,7 @@ MonoBehaviour:
   speed: 3
   forwardSpeed: 7
   inputNameHorizontal: Horizontal 1
+  isRunning: 1
 --- !u!114 &323950763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2437,16 +2438,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5e186358cc7df4e9455d33426dc2bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  correctSequencePlayer1:
+  correctSequence:
   - A
-  - S
-  - D
-  - W
-  correctSequencePlayer2:
-  - LeftArrow
-  - DownArrow
-  - RightArrow
-  - UpArrow
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -2722,7 +2715,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 446884961}
+  m_Mesh: {fileID: 30226333}
 --- !u!33 &378433299
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -3216,7 +3209,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 524558739}
+  m_Mesh: {fileID: 930446672}
 --- !u!33 &421961351
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -3522,6 +3515,10 @@ PrefabInstance:
     - target: {fileID: 6383084684813064557, guid: f15fbbefc5def2f448d05871eebd83e4, type: 3}
       propertyPath: m_Name
       value: Monticulo
+      objectReference: {fileID: 0}
+    - target: {fileID: 6383084684813064557, guid: f15fbbefc5def2f448d05871eebd83e4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8719654767107559919, guid: f15fbbefc5def2f448d05871eebd83e4, type: 3}
       propertyPath: m_LocalScale.x
@@ -3926,7 +3923,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1539394362}
+  m_Mesh: {fileID: 2127858680}
 --- !u!33 &456261513
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -4500,6 +4497,10 @@ PrefabInstance:
     - target: {fileID: 7430116608595900164, guid: 3d0b9796ba858cf43882f47680da9d81, type: 3}
       propertyPath: m_Name
       value: Escombro
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430116608595900164, guid: 3d0b9796ba858cf43882f47680da9d81, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6870,8 +6871,8 @@ Transform:
   m_GameObject: {fileID: 966229955}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0125, y: 24.02, z: 0.12419998}
-  m_LocalScale: {x: 0.60669, y: 9.2446, z: 0.02}
+  m_LocalPosition: {x: 0.0125, y: 24.02, z: 0.1117}
+  m_LocalScale: {x: 0.60669, y: 9.2446, z: 0.0017069569}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1587618584}
@@ -7619,6 +7620,7 @@ MonoBehaviour:
   speed: 3
   forwardSpeed: 7
   inputNameHorizontal: Horizontal 2
+  isRunning: 1
 --- !u!54 &1058665561
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7734,16 +7736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5e186358cc7df4e9455d33426dc2bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  correctSequencePlayer1:
-  - A
-  - S
-  - D
-  - W
-  correctSequencePlayer2:
-  - LeftArrow
-  - DownArrow
-  - RightArrow
-  - UpArrow
+  correctSequence: []
 --- !u!1 &1067227696
 GameObject:
   m_ObjectHideFlags: 0
@@ -7772,8 +7765,8 @@ Transform:
   m_GameObject: {fileID: 1067227696}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0125, y: 24.02, z: 0.12419998}
-  m_LocalScale: {x: 0.60669, y: 9.2446, z: 0.02}
+  m_LocalPosition: {x: 0.0125, y: 24.02, z: 0.1117}
+  m_LocalScale: {x: 0.60669, y: 9.2446, z: 0.0017069569}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 812608977}
@@ -8023,7 +8016,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 761116066}
+  m_Mesh: {fileID: 524558739}
 --- !u!33 &1096478562
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -10020,6 +10013,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monticulo
       objectReference: {fileID: 0}
+    - target: {fileID: 6383084684813064557, guid: f15fbbefc5def2f448d05871eebd83e4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8719654767107559919, guid: f15fbbefc5def2f448d05871eebd83e4, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.125
@@ -10493,7 +10490,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 2127858680}
+  m_Mesh: {fileID: 446884961}
 --- !u!33 &1568895616
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -10961,6 +10958,10 @@ PrefabInstance:
     - target: {fileID: 7430116608595900164, guid: 3d0b9796ba858cf43882f47680da9d81, type: 3}
       propertyPath: m_Name
       value: Escombro
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430116608595900164, guid: 3d0b9796ba858cf43882f47680da9d81, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
