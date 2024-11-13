@@ -1805,13 +1805,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 323950756}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 003d6fd709f740a479a692e3ec48e1a6, type: 3}
+  m_Script: {fileID: 11500000, guid: df5e186358cc7df4e9455d33426dc2bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flightForwardDistance: 10
-  syncPlatform: {fileID: 0}
-  penalizedSpeed: 3
-  penalizationDuration: 2
+  correctSequencePlayer1:
+  - A
+  - S
+  - D
+  - W
+  correctSequencePlayer2:
+  - LeftArrow
+  - DownArrow
+  - RightArrow
+  - UpArrow
 --- !u!1 &330256885
 GameObject:
   m_ObjectHideFlags: 0
@@ -2581,55 +2587,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64422271e995e8a4a956ca85458290d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &490549355
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 490549357}
-  - component: {fileID: 490549356}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &490549356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490549355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df5e186358cc7df4e9455d33426dc2bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correctSequence:
-  - A
-  - S
-  - D
-  - W
---- !u!4 &490549357
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490549355}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.93, y: 7.3298893, z: 19.298035}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &520438662
 Mesh:
   m_ObjectHideFlags: 0
@@ -4948,13 +4905,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1058665558}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 003d6fd709f740a479a692e3ec48e1a6, type: 3}
+  m_Script: {fileID: 11500000, guid: df5e186358cc7df4e9455d33426dc2bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flightForwardDistance: 10
-  syncPlatform: {fileID: 0}
-  penalizedSpeed: 3
-  penalizationDuration: 2
+  correctSequencePlayer1:
+  - A
+  - S
+  - D
+  - W
+  correctSequencePlayer2:
+  - LeftArrow
+  - DownArrow
+  - RightArrow
+  - UpArrow
 --- !u!43 &1089822690
 Mesh:
   m_ObjectHideFlags: 0
@@ -9680,4 +9643,3 @@ SceneRoots:
   - {fileID: 657700776}
   - {fileID: 475035616}
   - {fileID: 1255868059}
-  - {fileID: 490549357}

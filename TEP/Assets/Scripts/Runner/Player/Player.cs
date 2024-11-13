@@ -97,6 +97,8 @@ public class Player : MonoBehaviour
 
     //     playerRenderer.enabled = true;  // Muestra el modelo
     // }
+
+    
     private void OnDestroy()
     {
         // Desuscribirse del evento al destruir el objeto
