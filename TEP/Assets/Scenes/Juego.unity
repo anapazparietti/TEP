@@ -590,6 +590,7 @@ GameObject:
   - component: {fileID: 123681420}
   - component: {fileID: 123681419}
   - component: {fileID: 123681418}
+  - component: {fileID: 123681421}
   m_Layer: 0
   m_Name: Entrada Sincro
   m_TagString: EntraSincro
@@ -686,6 +687,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123681416}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &123681421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123681416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5dc9c6ced149a24298ebc34b520225d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sequence1:
+  - i
+  - i
+  sequence2: []
 --- !u!1001 &125152991
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7499,8 +7516,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea91432fc575f3548903c7eb6d2d3dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  correctSequence:
-  - K
 --- !u!114 &1058665566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7514,6 +7529,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncDuration: 5
+  penaltyDuration: 3
+  penaltySpeedMultiplier: 0.5
 --- !u!114 &1058665567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7542,6 +7559,7 @@ GameObject:
   - component: {fileID: 1067227700}
   - component: {fileID: 1067227699}
   - component: {fileID: 1067227698}
+  - component: {fileID: 1067227701}
   m_Layer: 0
   m_Name: Entrada Sincro
   m_TagString: EntraSincro
@@ -7638,6 +7656,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067227696}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1067227701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067227696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5dc9c6ced149a24298ebc34b520225d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sequence1:
+  - j
+  - k
+  - k
+  sequence2: []
 --- !u!4 &1082635804 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1193166989581890974, guid: b0f68d2b51c46f842a0ee484de591f12, type: 3}

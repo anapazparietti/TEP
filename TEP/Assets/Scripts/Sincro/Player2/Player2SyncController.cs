@@ -10,6 +10,10 @@ public class Player2SyncController : MonoBehaviour
     private Player2 player;
     private SyncManager2 syncManager;
 
+    [Header("Penalización por fallo")]
+    public float penaltyDuration = 3f; // Duración de la penalización
+    public float penaltySpeedMultiplier = 0.5f; // Multiplicador para reducir la velocidad del jugador
+
     private void Start()
     {
         // Obtén referencias a los componentes
@@ -24,7 +28,7 @@ public class Player2SyncController : MonoBehaviour
         {
             syncTimer -= Time.deltaTime;
 
-            // Si se acaba el tiempo, salir del modo sincro
+            // Si se acaba el tiempo, salir del modo sincro con fallo
             if (syncTimer <= 0)
             {
                 ExitSyncMode(false); // Sin éxito
@@ -49,17 +53,34 @@ public class Player2SyncController : MonoBehaviour
         isSyncing = false;
         player.isRunning = true; // Reactivar al jugador
 
-        // Enviar el resultado al script Player
-        player.SetSyncingResult(success);
-
         if (success)
         {
             Debug.Log($"{player.name} completó el modo sincro con éxito");
         }
         else
         {
+            ApplyPenalty();
             Debug.Log($"{player.name} falló en el modo sincro");
         }
+    }
+
+    // Método para aplicar penalización por fallo
+    private void ApplyPenalty()
+    {
+        StartCoroutine(PenaltyCoroutine());
+    }
+
+    private System.Collections.IEnumerator PenaltyCoroutine()
+    {
+        // Reduce la velocidad del jugador temporalmente
+        float originalSpeed = player.forwardSpeed;
+        player.forwardSpeed *= penaltySpeedMultiplier;
+
+        yield return new WaitForSeconds(penaltyDuration);
+
+        // Restaura la velocidad original
+        player.forwardSpeed = originalSpeed;
+        Debug.Log($"{player.name} ha recuperado su velocidad normal");
     }
 
     // Método para verificar si el jugador está en modo sincro

@@ -3,7 +3,7 @@ using UnityEngine;
 public class Player2 : MonoBehaviour
 {
     [SerializeField] public float speed;
-    [SerializeField] private float forwardSpeed;
+    [SerializeField] public float forwardSpeed;
     [SerializeField] private string inputNameHorizontal;
 
     private Rigidbody rb;
