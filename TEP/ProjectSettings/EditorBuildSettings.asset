@@ -8,9 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Juego.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/Scenes/menu.unity
-    guid: adff2ee4378ec85478e3c92ac62c2f7a
+  - enabled: 1
+    path: Assets/Scenes/Inicio.unity
+    guid: e4c8ca417b37c024488403aeee5ee104
+  - enabled: 1
+    path: Assets/Scenes/GanarP1.unity
+    guid: 8d59b28635d2fcf4ca756f485ed054ed
+  - enabled: 1
+    path: Assets/Scenes/GanarP2.unity
+    guid: 24ff0f8a32e7ae549a2efcaa4039c4b3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
