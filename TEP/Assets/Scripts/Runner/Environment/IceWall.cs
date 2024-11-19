@@ -6,14 +6,8 @@ public class IceWall : MonoBehaviour
     public KeyCode[] keySequence; // Secuencia de teclas para sincronizar pasos
     public float stepTimeLimit = 2f; // Tiempo límite para cada paso
     private int currentStep = 0; // Paso actual en la secuencia
-    private PlayerFlight playerFlight; // Referencia al PlayerFlight para comunicación
-
-    // Método para inicializar la secuencia, recibe el script PlayerFlight
-    public void StartStepSequence(PlayerFlight player)
-    {
-        playerFlight = player;
-        StartCoroutine(HandleStepSequence());
-    }
+    public GameObject onDestroyEffect; //efecto al pasar el muro de hielo
+  
 
     private IEnumerator HandleStepSequence()
     {
@@ -44,13 +38,23 @@ public class IceWall : MonoBehaviour
             else
             {
                 Debug.Log("Fallo en la secuencia. Aplicando penalización.");
-                playerFlight.FailSequence(); // Llama a la penalización en PlayerFlight
-                yield break;
+               
             }
         }
 
         Debug.Log("¡Secuencia completada!");
         GetComponent<Collider>().isTrigger = true; // Activa Is Trigger para que el jugador pase
-        playerFlight.CompleteSequence(); // Llama a completar el vuelo en PlayerFlight
     }
+
+private void OnTriggerEnter(Collider other) {
+
+  if(other.CompareTag("Player")){
+    //cuando el jugador entre en esta Trigger zone, se va a destruir el collectible
+  Destroy(gameObject);
+//para que se produzca el efecto no solo hay que agregar el archivo, sino que además hay que Instanciarlo:
+Instantiate(onDestroyEffect, transform.position, transform.rotation);
+  }
+  
+}
+
 }
