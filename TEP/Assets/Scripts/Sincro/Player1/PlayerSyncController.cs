@@ -1,76 +1,96 @@
 using UnityEngine;
+using Assets.Scripts.Sincro;
+
 
 public class PlayerSyncController : MonoBehaviour
 {
     [Header("Configuración del modo Sincro")]
-    public float syncDuration = 5f; // Duración del modo sincro
-    private float syncTimer;
+    public float syncDuration = 5f;
+    public float penaltyDuration = 3f;
+    public float penaltySpeedMultiplier = 0.5f;
+
+    private int currentSequenceIndex = 0;
+    private int currentStep = 0;
+    public float syncTimer;
     private bool isSyncing = false;
 
     private Player player;
-    private SyncManager syncManager;
+    public SyncManager syncManager;
 
     private void Start()
     {
-        // Obtén referencias a los componentes
         player = GetComponent<Player>();
-        syncManager = GetComponent<SyncManager>();
+        syncManager = FindObjectOfType<SyncManager>();
     }
 
     private void Update()
     {
-        // Verificar si estamos en el modo sincro
         if (isSyncing)
         {
             syncTimer -= Time.deltaTime;
-
-            // Si se acaba el tiempo, salir del modo sincro
             if (syncTimer <= 0)
             {
-                ExitSyncMode(false); // Sin éxito
+                OnSequenceComplete(false); // Tiempo agotado
             }
         }
     }
 
-    // Método para entrar en el modo sincro
     public void EnterSyncMode()
     {
         isSyncing = true;
         syncTimer = syncDuration;
-        player.isRunning = false; // Detener al jugador
-
-        // Notificar en la consola
-        Debug.Log($"{player.name} ha entrado en el modo sincro");
+        player.isRunning = false;
     }
 
-    // Método para salir del modo sincro
     public void ExitSyncMode(bool success)
     {
         isSyncing = false;
-        player.isRunning = true; // Reactivar al jugador
+        player.isRunning = true;
 
-        // Enviar el resultado al script Player
-        player.SetSyncingResult(success);
-
-        if (success)
+        if (!success)
         {
-            Debug.Log($"{player.name} completó el modo sincro con éxito");
-        }
-        else
-        {
-            Debug.Log($"{player.name} falló en el modo sincro");
+            ApplyPenalty();
         }
     }
 
-    // Método para verificar si el jugador está en modo sincro
-    public bool IsSyncing()
-    {
-        return isSyncing;
-    }
-
-    // Método llamado por SyncManager cuando se completa la secuencia
     public void OnSequenceComplete(bool success)
     {
         ExitSyncMode(success);
+        if (success)
+        {
+            currentStep = 0;
+            currentSequenceIndex++;
+        }
+    }
+
+    public bool IsSyncing() => isSyncing;
+    public int GetSequenceIndex() => currentSequenceIndex;
+
+    public bool IsCorrectStep(string key, string[] sequence)
+    {
+        return currentStep < sequence.Length && key == sequence[currentStep];
+    }
+
+    public void AdvanceStep()
+    {
+        currentStep++;
+    }
+
+    public bool IsSequenceComplete(int sequenceLength)
+    {
+        return currentStep >= sequenceLength;
+    }
+
+    private void ApplyPenalty()
+    {
+        StartCoroutine(PenaltyCoroutine());
+    }
+
+    private System.Collections.IEnumerator PenaltyCoroutine()
+    {
+        float originalSpeed = player.forwardSpeed;
+        player.forwardSpeed *= penaltySpeedMultiplier;
+        yield return new WaitForSeconds(penaltyDuration);
+        player.forwardSpeed = originalSpeed;
     }
 }

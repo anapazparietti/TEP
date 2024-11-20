@@ -2411,6 +2411,7 @@ MonoBehaviour:
   forwardSpeed: 7
   inputNameHorizontal: Horizontal 1
   isRunning: 1
+  syncManager: {fileID: 0}
 --- !u!114 &323950763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2425,6 +2426,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   correctSequence:
   - A
+  currentStep: 0
+  teclaApretada: Null
+  playerSyncController: {fileID: 0}
 --- !u!114 &323950764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2438,6 +2442,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncDuration: 5
+  penaltyDuration: 3
+  penaltySpeedMultiplier: 0.5
+  syncTimer: 0
+  syncManager: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -8145,6 +8153,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea91432fc575f3548903c7eb6d2d3dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSequenceIndex: 0
+  currentStep: 0
+  teclaApretada: Null
+  player2SyncController: {fileID: 0}
 --- !u!114 &1058665566
 MonoBehaviour:
   m_ObjectHideFlags: 0

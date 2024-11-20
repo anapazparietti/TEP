@@ -1,4 +1,5 @@
 using UnityEngine;
+using Assets.Scripts.Sincro;
 
 public class Player2 : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Player2 : MonoBehaviour
     private float originalForwardSpeed;
     public bool isRunning = true;
 
-    private SyncManager2 syncManager;
+    private SyncManager syncManager;
     private Player2SyncController playerSyncController;
 
       // Estado local del jugador
@@ -23,7 +24,7 @@ public class Player2 : MonoBehaviour
         originalForwardSpeed = forwardSpeed;
 
         // Inicializar SyncManager y PlayerSyncController
-        syncManager = GetComponent<SyncManager2>();
+        syncManager = GetComponent<SyncManager>();
         playerSyncController = GetComponent<Player2SyncController>();
     }
 
