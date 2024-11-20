@@ -1,70 +1,92 @@
 using UnityEngine;
+using Assets.Scripts.Sincro;
 
 public class Player2SyncController : MonoBehaviour
 {
     [Header("Configuración del modo Sincro")]
     public float syncDuration = 5f; // Duración del modo sincro
-    private float syncTimer;
-    private bool isSyncing = false;
+    public float penaltyDuration = 3f; // Penalización en segundos
+    public float penaltySpeedMultiplier = 0.5f; // Velocidad reducida durante la penalización
 
-    private Player2 player;
-    private SyncManager2 syncManager;
+    private int currentSequenceIndex = 0; // Índice actual de la secuencia
+    private int currentStep = 0; // Paso actual dentro de la secuencia
+    private float syncTimer; // Temporizador para el modo sincro
+    private bool isSyncing = false; // Indicador del estado de sincronización
 
-    [Header("Penalización por fallo")]
-    public float penaltyDuration = 3f; // Duración de la penalización
-    public float penaltySpeedMultiplier = 0.5f; // Multiplicador para reducir la velocidad del jugador
+    private Player2 player; // Referencia al script del jugador 2
+    private SyncManager syncManager; // Referencia al SyncManager compartido
 
     private void Start()
     {
-        // Obtén referencias a los componentes
         player = GetComponent<Player2>();
-        syncManager = GetComponent<SyncManager2>();
+        syncManager = FindObjectOfType<SyncManager>(); // Encontrar el SyncManager en la escena
     }
 
     private void Update()
     {
-        // Verificar si estamos en el modo sincro
         if (isSyncing)
         {
             syncTimer -= Time.deltaTime;
-
-            // Si se acaba el tiempo, salir del modo sincro con fallo
             if (syncTimer <= 0)
             {
-                ExitSyncMode(false); // Sin éxito
+                OnSequenceComplete(false); // Finalizar sincronización sin éxito
             }
         }
     }
 
-    // Método para entrar en el modo sincro
     public void EnterSyncMode()
     {
         isSyncing = true;
         syncTimer = syncDuration;
-        player.isRunning = false; // Detener al jugador
-
-        // Notificar en la consola
-        Debug.Log($"{player.name} ha entrado en el modo sincro");
+        player.isRunning = false; // Detener al jugador durante el modo sincro
+        Debug.Log($"{player.name} ha entrado en modo sincro");
     }
 
-    // Método para salir del modo sincro
     public void ExitSyncMode(bool success)
     {
         isSyncing = false;
         player.isRunning = true; // Reactivar al jugador
 
+        if (!success)
+        {
+            ApplyPenalty(); // Aplicar penalización en caso de fallo
+        }
+
+        Debug.Log(success ? $"{player.name} completó el modo sincro con éxito" : $"{player.name} falló en el modo sincro");
+    }
+
+    public void OnSequenceComplete(bool success)
+    {
+        ExitSyncMode(success);
+
         if (success)
         {
-            Debug.Log($"{player.name} completó el modo sincro con éxito");
-        }
-        else
-        {
-            ApplyPenalty();
-            Debug.Log($"{player.name} falló en el modo sincro");
+            currentStep = 0; // Reiniciar pasos
+            currentSequenceIndex++; // Avanzar a la siguiente secuencia
         }
     }
 
-    // Método para aplicar penalización por fallo
+    public bool IsSyncing() => isSyncing; // Verificar si está en modo sincro
+
+    public int GetSequenceIndex() => currentSequenceIndex; // Obtener el índice de la secuencia actual
+
+    public bool IsCorrectStep(string key, string[] sequence)
+    {
+        // Verificar si el paso actual es correcto
+        return currentStep < sequence.Length && key == sequence[currentStep];
+    }
+
+    public void AdvanceStep()
+    {
+        currentStep++; // Avanzar al siguiente paso
+    }
+
+    public bool IsSequenceComplete(int sequenceLength)
+    {
+        // Verificar si se completó la secuencia
+        return currentStep >= sequenceLength;
+    }
+
     private void ApplyPenalty()
     {
         StartCoroutine(PenaltyCoroutine());
@@ -72,26 +94,12 @@ public class Player2SyncController : MonoBehaviour
 
     private System.Collections.IEnumerator PenaltyCoroutine()
     {
-        // Reduce la velocidad del jugador temporalmente
-        float originalSpeed = player.forwardSpeed;
-        player.forwardSpeed *= penaltySpeedMultiplier;
+        float originalSpeed = player.forwardSpeed; // Guardar la velocidad original
+        player.forwardSpeed *= penaltySpeedMultiplier; // Reducir la velocidad
 
-        yield return new WaitForSeconds(penaltyDuration);
+        yield return new WaitForSeconds(penaltyDuration); // Esperar la penalización
 
-        // Restaura la velocidad original
-        player.forwardSpeed = originalSpeed;
+        player.forwardSpeed = originalSpeed; // Restaurar la velocidad original
         Debug.Log($"{player.name} ha recuperado su velocidad normal");
-    }
-
-    // Método para verificar si el jugador está en modo sincro
-    public bool IsSyncing()
-    {
-        return isSyncing;
-    }
-
-    // Método llamado por SyncManager cuando se completa la secuencia
-    public void OnSequenceComplete(bool success)
-    {
-        ExitSyncMode(success);
     }
 }

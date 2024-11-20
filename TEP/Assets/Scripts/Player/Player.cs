@@ -1,9 +1,10 @@
 using UnityEngine;
+using Assets.Scripts.Sincro;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] public float speed;
-    [SerializeField] private float forwardSpeed;
+    [SerializeField] public float forwardSpeed;
     [SerializeField] private string inputNameHorizontal;
 
     private Rigidbody rb;
@@ -11,7 +12,7 @@ public class Player : MonoBehaviour
     private float originalForwardSpeed;
     public bool isRunning = true;
 
-    private SyncManager syncManager;
+    public SyncManager syncManager;
     private PlayerSyncController playerSyncController;
 
     private void Start()

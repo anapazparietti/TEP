@@ -1,30 +1,30 @@
-using System.Collections.Generic; // Necesario para listas
 using UnityEngine;
+using System.Collections.Generic;
+using Assets.Scripts.Sincro;
+
 
 public class SyncSequenceTrigger : MonoBehaviour
 {
-    [Header("Nuevas Secuencias para Asignar")]
     public string[] sequence1;
     public string[] sequence2;
 
     private void OnTriggerEnter(Collider other)
     {
+<<<<<<< Updated upstream
         if (other.CompareTag("Player2"))
+=======
+        var playerController = other.GetComponent<PlayerSyncController>();
+        if (playerController != null)
+>>>>>>> Stashed changes
         {
-            SyncManager2 syncManager = other.GetComponent<SyncManager2>();
-            if (syncManager != null)
+            SyncManager syncManager = FindObjectOfType<SyncManager>();
+            syncManager.sequences = new List<string[]>
             {
-                // Crea una nueva lista de secuencias
-                var newSequences = new List<string[]>
-                {
-                    sequence1,
-                    sequence2
-                };
+                sequence1,
+                sequence2
+            };
 
-                // Actualiza las secuencias del SyncManager
-                syncManager.SetSequences(newSequences);
-                Debug.Log("Secuencias actualizadas desde el trigger");
-            }
+            Debug.Log($"Secuencias actualizadas para {other.name}");
         }
     }
 
