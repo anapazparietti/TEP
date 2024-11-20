@@ -9,7 +9,7 @@ public class SyncSequenceTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player2"))
         {
             SyncManager2 syncManager = other.GetComponent<SyncManager2>();
             if (syncManager != null)
@@ -27,4 +27,6 @@ public class SyncSequenceTrigger : MonoBehaviour
             }
         }
     }
+
+    
 }
