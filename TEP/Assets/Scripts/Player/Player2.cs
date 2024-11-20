@@ -88,7 +88,7 @@ public class Player2 : MonoBehaviour
         playerState = PlayerState.Running;
     }
 
-    private void ApplySpeedPenalty()
+    public void ApplySpeedPenalty()
     {
         playerState = PlayerState.Penalized;
         forwardSpeed /= 2f;

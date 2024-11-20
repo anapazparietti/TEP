@@ -66,6 +66,10 @@ public class Player : MonoBehaviour
                 }
             }
         }
+     if (other.CompareTag("Obstacle"))
+     {
+ApplySpeedPenalty();
+     }
     }
 
     // Método para definir el resultado del Syncing
@@ -85,7 +89,7 @@ public class Player : MonoBehaviour
         StateManager.Instance.ChangeState(StateManager.GameState.Running);
     }
 
-    private void ApplySpeedPenalty()
+    public void ApplySpeedPenalty()
     {
         forwardSpeed /= 2f;
         Debug.Log($"{name} penalizado a velocidad: {forwardSpeed}");
