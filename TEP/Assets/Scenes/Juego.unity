@@ -2424,11 +2424,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5e186358cc7df4e9455d33426dc2bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  correctSequence:
-  - A
-  currentStep: 0
-  teclaApretada: Null
-  playerSyncController: {fileID: 0}
 --- !u!114 &323950764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8153,10 +8148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea91432fc575f3548903c7eb6d2d3dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSequenceIndex: 0
-  currentStep: 0
-  teclaApretada: Null
-  player2SyncController: {fileID: 0}
 --- !u!114 &1058665566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8310,9 +8301,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sequence1:
-  - J
-  - K
-  - K
+  - X
+  - R
+  - F
+  - Z
   sequence2: []
 --- !u!4 &1082635804 stripped
 Transform:
