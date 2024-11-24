@@ -7,6 +7,7 @@ TagManager:
   - Obstacle
   - Rampa
   - EntraSincro
+  - VelocidadNecesaria
   layers:
   - Default
   - TransparentFX
