@@ -1,43 +1,49 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerStateManager : MonoBehaviour
 {
-    public enum PlayerState { Runner, Sincro }
-    public PlayerState currentState = PlayerState.Runner;
+private Runner runnerState;
+private SincroState sincroState;
+private bool currentState = true;
 
-    public Player runnerScript;
-    public SincroState sincroScript;
+void Start()
+{
+ runnerState = GetComponent<Runner>();
+ sincroState = GetComponent<SincroState>();
+ SwitchToRunner();
+}
 
-    void Start()
+void Update()
+{
+    if(currentState)
     {
         SwitchToRunner();
     }
-
-    void Update()
+    if(currentState == false)
     {
-        if (currentState == PlayerState.Runner)
-        {
-            runnerScript.RunnerUpdate();
-        }
-        else if (currentState == PlayerState.Sincro)
-        {
-            sincroScript.SincroUpdate();
-        }
+        SwitchToSincro();
     }
+}
 
-    public void SwitchToRunner()
+public void SwitchToRunner()
+{ 
+    runnerState.enabled = true;
+    sincroState.enabled = false;
+    Debug.Log("Estado: Runner");
+
+}
+private void OnTriggerEnter(Collider other)
+{
+    if (other.CompareTag("EntraSincro"))
     {
-        currentState = PlayerState.Runner;
-        runnerScript.enabled = true;
-        sincroScript.enabled = false;
-        Debug.Log("Estado: Runner");
+        currentState = false;
     }
-
-    public void SwitchToSincro()
-    {
-        currentState = PlayerState.Sincro;
-        runnerScript.enabled = false;
-        sincroScript.enabled = true;
-        Debug.Log("Estado: Sincro");
-    }
+}
+public void SwitchToSincro()
+{
+    runnerState.enabled = false;
+    sincroState.enabled = true;
+    Debug.Log("Estado: Sincro");
+}
 }

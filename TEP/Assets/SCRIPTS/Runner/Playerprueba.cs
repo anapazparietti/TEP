@@ -3,12 +3,12 @@ using System.Collections;
 
 public class Playerprueba : MonoBehaviour
 {
-    private Player movControlado;
+    private Runner movControlado;
     private bool auto = false;
     
     void Start()
     {
-        movControlado =GetComponent<Player>();
+        movControlado =GetComponent<Runner>();
     }
    
    void Update()

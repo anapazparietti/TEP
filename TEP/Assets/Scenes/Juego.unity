@@ -674,6 +674,8 @@ GameObject:
   - component: {fileID: 323950762}
   - component: {fileID: 323950763}
   - component: {fileID: 323950764}
+  - component: {fileID: 323950766}
+  - component: {fileID: 323950765}
   m_Layer: 0
   m_Name: Jugador
   m_TagString: Player
@@ -812,10 +814,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a36313ea16c35f14e9ad4b76c93361a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  limitSpeed: 100
-  moveCostados: 9
-  increaseInterval: 1
 --- !u!114 &323950763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -840,9 +838,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0670116403457924c822800bd425c284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
-  runnerScript: {fileID: 0}
-  sincroScript: {fileID: 0}
+--- !u!114 &323950765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323950756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d92ccac9b251f44592ada76e0334c51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncSequence:
+  - W
+  - A
+  - S
+  - D
+--- !u!114 &323950766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323950756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d92ea7764fa18a49b4dff313edf8837, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
+  limitSpeed: 100
+  moveCostados: 9
+  increaseInterval: 1
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
