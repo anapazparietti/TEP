@@ -25,6 +25,11 @@ public class Playerprueba : MonoBehaviour
         {
             auto = true;
         }
+        if (other.CompareTag("EntraSincro"))
+        {
+            auto = false;
+            movControlado.enabled = true;
+        }
     }
      void MovAuto()
     {

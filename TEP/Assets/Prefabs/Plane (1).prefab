@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5445651012730012629}
   - component: {fileID: 4489849866362931036}
   - component: {fileID: 1594221115063614677}
+  - component: {fileID: 9121581572505301046}
   m_Layer: 0
   m_Name: Plane (1)
   m_TagString: Obstacle
@@ -106,5 +107,18 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 0.000000009313226, z: 9.999999}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 6.493377, y: 0.000000009313226, z: 9.373426}
+  m_Center: {x: -0.71591675, y: 0.0000000489268, z: 0.31327382}
+--- !u!114 &9121581572505301046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5388866790513752480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acb640aba38834b4fbe4b3fa0fb9dd71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDestroyEffect: {fileID: 104829970813648393, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -12,12 +13,21 @@ public class Player : MonoBehaviour
     public float increaseInterval = 1f; // Intervalo para aumentar velocidad
     private bool isHoldingW = false; // Indica si la tecla W está siendo mantenida
 
+    private bool isSincroActive = false; // Indica si está en estado Sincro
+
     void Start()
     {
     }
 
     void Update()
     {
+        RunnerUpdate();
+    }
+
+    public void RunnerUpdate()
+    {
+        if (isSincroActive) return; // Desactiva el movimiento si está en Sincro
+
         Debug.Log("La velocidad actual es de " + moveSpeed);
         Movimiento();
         VerificarInactividad(); // Verifica si ha pasado tiempo sin pulsar W
@@ -98,6 +108,14 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(DisminuyeVelocidad(5, 2f)); // Reduce velocidad a 5 por 2 segundos
         }
+        else if (other.CompareTag("EntraSincro")) // Activa el estado Sincro al colisionar con el trigger
+        {
+            EnterSincroState();
+        }
+        if(other.CompareTag("Finish"))
+        {
+            SceneManager.LoadScene("Ganar");
+        }
     }
 
     // CORRUTINA PARA DISMINUIR LA VELOCIDAD
@@ -109,4 +127,17 @@ public class Player : MonoBehaviour
         moveSpeed = 10;
         Debug.Log("Velocidad restaurada");
     }
+
+    // ---- ESTADO SINCRO ----
+    public void EnterSincroState()
+    {
+        isSincroActive = true; // Desactiva el movimiento
+        Debug.Log("Entrando en estado Sincro. Movimiento desactivado.");
+    }
+
+    public void ExitSincroState()
+    {
+        isSincroActive = false; // Reactiva el movimiento
+        Debug.Log("Saliendo del estado Sincro. Movimiento activado.");
+    }
 }
