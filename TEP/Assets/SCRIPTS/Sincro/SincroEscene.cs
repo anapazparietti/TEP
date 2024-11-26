@@ -3,15 +3,22 @@ using UnityEngine.UI;
 
 public class SincroEscene : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private PlayerStateManager estadosJugador;
+    public GameObject sincro1;
+    public GameObject sincro2;
+    public GameObject sincro3;
+    public GameObject sincro4;  
     void Start()
     {
+        estadosJugador = GetComponent<PlayerStateManager>();
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if(estadosJugador.currentState == false)
+        { Debug.Log("esto pasa");
+            sincro1.SetActive(true);
+        }
     }
 }

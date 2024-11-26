@@ -1,6 +1,6 @@
 using UnityEngine;
 public class SincroState : MonoBehaviour
-{
+{/*
     public string[] syncSequence = { "W", "A", "S", "D" }; // Secuencia de teclas.
     private int currentIndex = 0;
     private PlayerStateManager stateManager;
@@ -40,6 +40,6 @@ public class SincroState : MonoBehaviour
      Debug.Log("Secuencia completada. Cambiando a Runner.");
      stateManager.SwitchToRunner();
    //esto es importante pra finalizarla
-    }
+    }*/
 
 }
