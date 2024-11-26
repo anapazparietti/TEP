@@ -16,11 +16,11 @@ public class Velocimetro : MonoBehaviour
 
     void Update()
     {
-        speed = MiDino.velocity.magnitude * 3.6f;
+        speed = MiDino.linearVelocity.magnitude * 3.6f;
 
         if(Arrow != null)
         {
-            Arroe.localEulerAngles = new Vector3(0,0, Mathf.Lerp(MinSpeedArrowAngle, MaxSpeedArrowAngle, speed / Max_speed));
+            Arrow.localEulerAngles = new Vector3(0,0, Mathf.Lerp(MinSpeedArrowAngle, MaxSpeedArrowAngle, speed / Max_speed));
         }
     }
 }
