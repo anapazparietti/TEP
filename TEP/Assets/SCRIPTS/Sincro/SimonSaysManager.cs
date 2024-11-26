@@ -13,6 +13,7 @@ public class SimonSaysManager : MonoBehaviour
     public TextMeshProUGUI hudTXT;
 
     private List<int> simonSequence = new List<int>(); // Secuencia generada por Simon
+    public string[] syncSequence = { "W", "A", "S", "D" }; // Secuencia de teclas.
     private int playerIndex = 0; // �ndice actual del jugador
     private bool playerTurn = false; // Si es el turno del jugador
 

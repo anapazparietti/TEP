@@ -4,19 +4,24 @@ using UnityEngine.UI;
 
 public class Velocimetro : MonoBehaviour
 {
-    public Rigidbody MiDino;
+    public GameObject player;
     public float Max_speed = 200f;
     public float MinSpeedArrowAngle;
     public float MaxSpeedArrowAngle;
-
+    public Runner runner;
+ 
     [Header("UO")]
 
     public RectTransform Arrow;
     public float speed = 0.0f;
 
-    void Update()
+    void Start()
     {
-        speed = MiDino.linearVelocity.magnitude * 3.6f;
+        runner = player.GetComponent<Runner>();
+    }   
+    void Update()
+    { 
+        speed = runner.moveSpeed; /*3.6f;*/
 
         if(Arrow != null)
         {

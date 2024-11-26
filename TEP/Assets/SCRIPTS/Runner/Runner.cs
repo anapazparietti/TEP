@@ -12,8 +12,10 @@ public class Runner : MonoBehaviour
     public float increaseInterval = 1f; // Intervalo para aumentar velocidad
     private bool isHoldingW = false; // Indica si la tecla W está siendo mantenida
 
+    private Rigidbody jugador;
     void Start()
     {
+        jugador = gameObject.GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -29,7 +31,7 @@ public class Runner : MonoBehaviour
     }
 
     void Movimiento()
-    {
+    {   
         if (Input.GetKey(KeyCode.W))
         {
             lastInputTime = Time.time; // Registra el momento de la última pulsación
