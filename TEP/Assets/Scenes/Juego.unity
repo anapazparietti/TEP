@@ -975,10 +975,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncSequence:
-  - W
-  - A
-  - S
-  - D
+  - R
+  - T
+  - Y
+  - U
 --- !u!114 &323950766
 MonoBehaviour:
   m_ObjectHideFlags: 0
