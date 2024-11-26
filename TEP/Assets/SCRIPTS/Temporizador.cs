@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Temporizador : MonoBehaviour
 {
@@ -24,12 +25,12 @@ public class Temporizador : MonoBehaviour
         if(restante < 1)
         {
             enMovimiento = false;
-            //pantalla perdiste
+            SceneManager.LoadScene("Perder");
         }
         int tempMin = Mathf.FloorToInt(restante / 60);
         int tempSeg = Mathf.FloorToInt(restante % 60);
         tiempo.text = string.Format("{00:00}:{01:00}", tempMin, tempSeg);
       }
-
     }
+
 }

@@ -13,12 +13,4 @@ public class Inicio : MonoBehaviour
   {
    SceneManager.LoadScene("Inicio");
   }
-  public void EscenaGanar()
-  {
-    SceneManager.LoadScene("Ganar");
-  }
-  public void EscenaPerder()
-  {
-    SceneManager.LoadScene("Perder");
-  }
 }
