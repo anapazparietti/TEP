@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    private bool isSincroActive = false; // Indica si está en estado Sincro
+    private bool isSincroActive = false; // Indica si está en estado Sincro//no hace nada esto
 
     void Start()
     {

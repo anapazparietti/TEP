@@ -34,11 +34,11 @@ public class Runner : MonoBehaviour
         {
             lastInputTime = Time.time; // Registra el momento de la última pulsación
 
-            if (Input.GetKeyDown(KeyCode.W)) // Detecta si se presiona la tecla
+            if (Input.GetKeyDown(KeyCode.W)) 
             {
                 isHoldingW = false; // No está en modo "mantener"
                 if (Time.time - lastIncreaseTime > increaseInterval)
-                {
+                {//Input.
                     AumentoVelocidad();
                     lastIncreaseTime = Time.time; // Actualiza el tiempo del último aumento
                 }
