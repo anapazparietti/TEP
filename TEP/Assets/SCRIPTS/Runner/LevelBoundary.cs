@@ -4,8 +4,8 @@ using UnityEngine;
 //--------LÍMITES DE LA PISTA----
 public class LevelBoundary : MonoBehaviour
 {
-    public static float leftSide = -5;
-    public static float rightSide = 5;
+    public static float leftSide = -3;
+    public static float rightSide = 3;
     public float internalLeft;
     public float internalRight;
 

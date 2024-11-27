@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class SimonSaysManager : MonoBehaviour
@@ -22,7 +23,11 @@ public class SimonSaysManager : MonoBehaviour
     public Sprite[] posetochange;
     public Image fondo;
     public Sprite[] fondotochange;
+    public Image poseRota;
+    public Sprite[] poseRotarray;
     private int numfondo = 0;
+    public GameObject muro;
+    
 
 
     void Awake()
@@ -54,7 +59,9 @@ public class SimonSaysManager : MonoBehaviour
     public void IniciarSimonDice(int secuenciaAmount2)
     {
         fondo.sprite = fondotochange[numfondo];
-        pose.sprite = posetochange[Random.Range(0,posetochange.Length)];
+        int numPose = Random.Range(0,posetochange.Length);
+        pose.sprite = posetochange[numPose];
+        poseRota.sprite = poseRotarray[numPose];
         secuenciaAmount = secuenciaAmount2;
         StartCoroutine(StartGame());
         hudTXT.text = "CPU turn!";
@@ -131,6 +138,7 @@ public class SimonSaysManager : MonoBehaviour
         }
         else
         {
+            muro.SetActive(true);
             playerTurn = false;
             numfondo ++;
             playerprueba.auto = true;
@@ -138,6 +146,10 @@ public class SimonSaysManager : MonoBehaviour
             hudTXT.text = "Wrong :(";
             PlayerStateManager.Instance.SwitchToRunner();
             PlayerStateManager.Instance.dificultad+=2;
+            if( PlayerStateManager.Instance.dificultad==9)
+            {
+                SceneManager.LoadScene("Perder");
+            }
             
         }
     }

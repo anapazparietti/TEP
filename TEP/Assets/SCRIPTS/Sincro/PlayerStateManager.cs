@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerStateManager : MonoBehaviour
 {
@@ -37,6 +38,10 @@ public class PlayerStateManager : MonoBehaviour
         {
             SwitchToSincro();
             Destroy(other.gameObject);
+        }
+        if(other.CompareTag("Finish"))
+        {
+          SceneManager.LoadScene("Ganar");
         }
     }
     public void SwitchToSincro()

@@ -104,7 +104,7 @@ public class Runner : MonoBehaviour
     {
         if (other.CompareTag("Obstacle") && !sincrOk)
         {
-            StartCoroutine(DisminuyeVelocidad(5, 2f)); // Reduce velocidad a 5 por 2 segundos
+            StartCoroutine(DisminuyeVelocidad(moveSpeed/2, 1f)); // Reduce velocidad a 5 por 2 segundos
         }
         else if (other.CompareTag("Obstacle") && sincrOk)
         {
@@ -118,7 +118,7 @@ public class Runner : MonoBehaviour
         Debug.Log("La velocidad se reduce temporalmente");
         moveSpeed = nuevaVelocidad;
         yield return new WaitForSeconds(duracion);
-        moveSpeed = 10;
+        moveSpeed = moveSpeed/2;
         Debug.Log("Velocidad restaurada");
     }
 }

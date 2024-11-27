@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Velocimetro : MonoBehaviour
 {
     public GameObject player;
-    public float Max_speed = 200f;
+    public float Max_speed = 100f;
     public float MinSpeedArrowAngle;
     public float MaxSpeedArrowAngle;
     public Runner runner;
