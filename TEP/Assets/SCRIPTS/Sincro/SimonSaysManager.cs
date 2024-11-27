@@ -12,17 +12,17 @@ public class SimonSaysManager : MonoBehaviour
     public float flashDuration = 0.5f; // Duraci�n del destello
     public float delayBetweenFlashes = 0.5f; // Retraso entre flashes
     private int secuenciaAmount;
-
     //public TextMeshProUGUI hudTXT; //Texto para la interfaz y el feedback
-
     private List<int> simonSequence = new List<int>(); // Secuencia generada por Simon
     private int playerIndex = 0; // �ndice actual del jugador
     private bool playerTurn = false; // Si es el turno del jugador
     public Playerprueba playerprueba;
     public Runner runner;
-
     public Image pose;
     public Sprite[] posetochange;
+    public Image fondo;
+    public Sprite[] fondotochange;
+    private int numfondo = 0;
 
 
     void Awake()
@@ -53,6 +53,7 @@ public class SimonSaysManager : MonoBehaviour
 
     public void IniciarSimonDice(int secuenciaAmount2)
     {
+        fondo.sprite = fondotochange[numfondo];
         pose.sprite = posetochange[Random.Range(0,posetochange.Length)];
         secuenciaAmount = secuenciaAmount2;
         StartCoroutine(StartGame());
@@ -118,6 +119,7 @@ public class SimonSaysManager : MonoBehaviour
             playerIndex++;
             if (playerIndex >= simonSequence.Count)
             {  
+                numfondo ++;
                 playerprueba.auto = true;
                 runner.sincrOk = true;
                 PlayerStateManager.Instance.SwitchToRunner();
@@ -126,6 +128,7 @@ public class SimonSaysManager : MonoBehaviour
         }
         else
         {
+            numfondo ++;
             playerprueba.auto = true;
             runner.sincrOk = false;
             PlayerStateManager.Instance.SwitchToRunner();

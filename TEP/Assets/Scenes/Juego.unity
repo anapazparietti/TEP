@@ -2163,11 +2163,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1872290284}
+  - {fileID: 1026852160}
+  - {fileID: 638605383}
   - {fileID: 1314542193}
   - {fileID: 1902815383}
-  - {fileID: 1026852160}
-  - {fileID: 1872290284}
-  - {fileID: 638605383}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2833,7 +2833,7 @@ GameObject:
   m_Component:
   - component: {fileID: 750647361}
   m_Layer: 0
-  m_Name: Tercera (1)
+  m_Name: Cuarta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5991,7 +5991,7 @@ GameObject:
   - component: {fileID: 1547627838}
   - component: {fileID: 1547627837}
   m_Layer: 5
-  m_Name: Fondo1
+  m_Name: Fondo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6029,15 +6029,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.40784314, b: 1, a: 0.70980394}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 57a0e367c70b36c4dbf74bbc5f07a12e, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -8607,6 +8607,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ab340158014cbb943ab4fa94ef18caa6, type: 3}
   - {fileID: 21300000, guid: e05bff871fc6b1d41accf19fb0a2eb8d, type: 3}
   - {fileID: 21300000, guid: 7fe9a4c208fad50468c7e8c0f6eda312, type: 3}
+  fondo: {fileID: 1547627837}
+  fondotochange:
+  - {fileID: 21300000, guid: fb76c076718a68a4580b98fcc308470d, type: 3}
+  - {fileID: 21300000, guid: dbc01482507ce49469680bb5c74debb7, type: 3}
+  - {fileID: 21300000, guid: b936bc597b764ce4da45e7d292ae3986, type: 3}
 --- !u!4 &2076195105
 Transform:
   m_ObjectHideFlags: 0
