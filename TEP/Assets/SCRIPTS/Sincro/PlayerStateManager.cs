@@ -6,9 +6,7 @@ public class PlayerStateManager : MonoBehaviour
     public static PlayerStateManager Instance;
 
     private Runner runnerState;
-    private SincroState sincroState;
     private Playerprueba flying;
-    private bool currentState = true;
     
     public GameObject sincro;
 
@@ -20,21 +18,8 @@ public class PlayerStateManager : MonoBehaviour
     void Start()
     {
          runnerState = GetComponent<Runner>();
-         sincroState = GetComponent<SincroState>();
          flying = GetComponent<Playerprueba>();
          SwitchToRunner();
-    }
-
-    void Update()
-    {
-    //     if(currentState)
-    //     {
-    //         SwitchToRunner();
-    //     }
-    //     if(currentState == false)
-    //     {
-    //         SwitchToSincro();
-    //     }
     }
 
     public void SwitchToRunner()
@@ -42,9 +27,7 @@ public class PlayerStateManager : MonoBehaviour
         flying.enabled = true;
         sincro.SetActive(false);
         runnerState.enabled = true;
-        sincroState.enabled = false;
         Debug.Log("Estado: Runner");
-        currentState = true;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -58,7 +41,6 @@ public class PlayerStateManager : MonoBehaviour
     {
         flying.enabled = false;
         runnerState.enabled = false;
-        sincroState.enabled = true;
         sincro.SetActive(true);
         SimonSaysManager.instance.IniciarSimonDice(Random.Range(1, 5));
     }

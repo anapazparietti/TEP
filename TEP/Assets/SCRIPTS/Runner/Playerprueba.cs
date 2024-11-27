@@ -21,7 +21,7 @@ public class Playerprueba : MonoBehaviour
      // ---- COLISIONES ----
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("VelocidadNecesaria"))
+        if (other.CompareTag("Rampa"))
         {
             auto = true;
         }
