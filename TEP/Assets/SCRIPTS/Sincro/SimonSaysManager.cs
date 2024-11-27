@@ -21,6 +21,10 @@ public class SimonSaysManager : MonoBehaviour
     public Playerprueba playerprueba;
     public Runner runner;
 
+    public Image pose;
+    public Sprite[] posetochange;
+
+
     void Awake()
     {
         instance = this;
@@ -49,6 +53,7 @@ public class SimonSaysManager : MonoBehaviour
 
     public void IniciarSimonDice(int secuenciaAmount2)
     {
+        pose.sprite = posetochange[Random.Range(0,posetochange.Length)];
         secuenciaAmount = secuenciaAmount2;
         StartCoroutine(StartGame());
        // hudTXT.text = "CPU turn!";
@@ -112,7 +117,8 @@ public class SimonSaysManager : MonoBehaviour
         {
             playerIndex++;
             if (playerIndex >= simonSequence.Count)
-            { playerprueba.auto = true;
+            {  
+                playerprueba.auto = true;
                 runner.sincrOk = true;
                 PlayerStateManager.Instance.SwitchToRunner();
                 playerTurn = false;
