@@ -10,6 +10,8 @@ public class PlayerStateManager : MonoBehaviour
     
     public GameObject sincro;
 
+    public int dificultad = 1;
+
 
     private void Awake()
     {
@@ -42,6 +44,6 @@ public class PlayerStateManager : MonoBehaviour
         flying.enabled = false;
         runnerState.enabled = false;
         sincro.SetActive(true);
-        SimonSaysManager.instance.IniciarSimonDice(Random.Range(1, 5));
+        SimonSaysManager.instance.IniciarSimonDice(dificultad);
     }
 }

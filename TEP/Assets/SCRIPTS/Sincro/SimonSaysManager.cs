@@ -12,7 +12,7 @@ public class SimonSaysManager : MonoBehaviour
     public float flashDuration = 0.5f; // Duraci�n del destello
     public float delayBetweenFlashes = 0.5f; // Retraso entre flashes
     private int secuenciaAmount;
-    //public TextMeshProUGUI hudTXT; //Texto para la interfaz y el feedback
+    public TextMeshProUGUI hudTXT; //Texto para la interfaz y el feedback
     private List<int> simonSequence = new List<int>(); // Secuencia generada por Simon
     private int playerIndex = 0; // �ndice actual del jugador
     private bool playerTurn = false; // Si es el turno del jugador
@@ -57,7 +57,7 @@ public class SimonSaysManager : MonoBehaviour
         pose.sprite = posetochange[Random.Range(0,posetochange.Length)];
         secuenciaAmount = secuenciaAmount2;
         StartCoroutine(StartGame());
-       // hudTXT.text = "CPU turn!";
+        hudTXT.text = "CPU turn!";
     }
 
     IEnumerator StartGame()
@@ -93,7 +93,7 @@ public class SimonSaysManager : MonoBehaviour
 
         playerIndex = 0;
         playerTurn = true;
-       // hudTXT.text = "Player turn!";
+        hudTXT.text = "Player turn!";
     }
 
     void FlashButton(Image image)
@@ -119,21 +119,26 @@ public class SimonSaysManager : MonoBehaviour
             playerIndex++;
             if (playerIndex >= simonSequence.Count)
             {  
+                playerTurn = false;
                 numfondo ++;
                 playerprueba.auto = true;
                 runner.sincrOk = true;
+                hudTXT.text = "Good :)";
                 PlayerStateManager.Instance.SwitchToRunner();
-                playerTurn = false;
+                PlayerStateManager.Instance.dificultad+=2;
+
             }
         }
         else
         {
+            playerTurn = false;
             numfondo ++;
             playerprueba.auto = true;
             runner.sincrOk = false;
+            hudTXT.text = "Wrong :(";
             PlayerStateManager.Instance.SwitchToRunner();
-            playerTurn = false;
-           // hudTXT.text = "Wrong :( restarting game";
+            PlayerStateManager.Instance.dificultad+=2;
+            
         }
     }
 }
