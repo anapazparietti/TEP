@@ -4,7 +4,7 @@ using System.Collections;
 public class Playerprueba : MonoBehaviour
 {
     private Runner movControlado;
-    private bool auto = false;
+    public bool auto = false;
     
     void Start()
     {
@@ -25,7 +25,7 @@ public class Playerprueba : MonoBehaviour
         {
             auto = true;
         }
-        if (other.CompareTag("EntraSincro"))
+        if (other.CompareTag("EntraSincro") || other.CompareTag("vuelveRunner"))
         {
             auto = false;
             movControlado.enabled = true;

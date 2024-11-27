@@ -1,59 +1,65 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
-
 
 public class PlayerStateManager : MonoBehaviour
 {
-private Runner runnerState;
-private SincroState sincroState;
-private Playerprueba flying;
-public bool currentState;
+    public static PlayerStateManager Instance;
 
-void Start()
-{
- currentState=true;
- runnerState = GetComponent<Runner>();
- sincroState = GetComponent<SincroState>();
- flying = GetComponent<Playerprueba>();
- SwitchToRunner();
-}
+    private Runner runnerState;
+    private SincroState sincroState;
+    private Playerprueba flying;
+    private bool currentState = true;
+    
+    public GameObject sincro;
 
-void Update()
-{
-    if(currentState)
-    {
-        SwitchToRunner();
-    }
-    else
-    {
-        SwitchToSincro();
-    }
-}
 
-public void SwitchToRunner()
-{ 
-    runnerState.enabled = true;
-    sincroState.enabled = false;
-    Debug.Log("Estado: Runner");
+    private void Awake()
+    {
+        Instance = this;
+    }
+    void Start()
+    {
+         runnerState = GetComponent<Runner>();
+         sincroState = GetComponent<SincroState>();
+         flying = GetComponent<Playerprueba>();
+         SwitchToRunner();
+    }
 
-}
-private void OnTriggerEnter(Collider other)
-{
-    if (other.CompareTag("EntraSincro"))
+    void Update()
     {
-        currentState = false;
+    //     if(currentState)
+    //     {
+    //         SwitchToRunner();
+    //     }
+    //     if(currentState == false)
+    //     {
+    //         SwitchToSincro();
+    //     }
     }
-    if(other.CompareTag("Finish"))
+
+    public void SwitchToRunner()
+    { 
+        flying.enabled = true;
+        sincro.SetActive(false);
+        runnerState.enabled = true;
+        sincroState.enabled = false;
+        Debug.Log("Estado: Runner");
+        currentState = true;
+    }
+    private void OnTriggerEnter(Collider other)
     {
-            SceneManager.LoadScene("Ganar");
+        if (other.CompareTag("EntraSincro"))
+        {
+            SwitchToSincro();
+            Destroy(other.gameObject);
+        }
     }
-}
-public void SwitchToSincro()
-{
-    flying.enabled = false;
-    runnerState.enabled = false;
-    sincroState.enabled = true;
-    Debug.Log("Estado: Sincro");
-}
+    public void SwitchToSincro()
+    {
+        flying.enabled = false;
+        runnerState.enabled = false;
+        sincroState.enabled = true;
+        sincro.SetActive(true);
+        SimonSaysManager.instance.IniciarSimonDice(Random.Range(1, 5));
+    }
 }

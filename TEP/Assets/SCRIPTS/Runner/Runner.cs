@@ -11,6 +11,7 @@ public class Runner : MonoBehaviour
     private float lastIncreaseTime = 0f; // Tiempo del último aumento de velocidad
     public float increaseInterval = 1f; // Intervalo para aumentar velocidad
     private bool isHoldingW = false; // Indica si la tecla W está siendo mantenida
+    public bool sincrOk;
 
     private Rigidbody jugador;
     void Start()
@@ -101,9 +102,13 @@ public class Runner : MonoBehaviour
     // ---- COLISIONES ----
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Obstacle"))
+        if (other.CompareTag("Obstacle") && !sincrOk)
         {
             StartCoroutine(DisminuyeVelocidad(5, 2f)); // Reduce velocidad a 5 por 2 segundos
+        }
+        else if (other.CompareTag("Obstacle") && sincrOk)
+        {
+            AumentoVelocidad();
         }
     }
 
