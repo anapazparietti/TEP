@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Runner : MonoBehaviour
 {
+    public static Runner Instance;
     public float moveSpeed = 10; 
     public float limitSpeed = 100;
     public float moveCostados = 9;
@@ -26,7 +27,7 @@ public class Runner : MonoBehaviour
 
    public void RunnerUpdate()
     {
-         Debug.Log("La velocidad actual es de " + moveSpeed);
+        Debug.Log("La velocidad actual es de " + moveSpeed);
         Movimiento();
         VerificarInactividad(); // Verifica si ha pasado tiempo sin pulsar W
     }

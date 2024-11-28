@@ -19,15 +19,18 @@ public class SimonSaysManager : MonoBehaviour
     private bool playerTurn = false; // Si es el turno del jugador
     public Playerprueba playerprueba;
     public Runner runner;
+    [Header("Muros Sanos")]
+    public GameObject muroSano;
     public Image pose;
     public Sprite[] posetochange;
-    public Image fondo;
-    public Sprite[] fondotochange;
+    [Header("Muros Rotos")]
+    public GameObject muroRoto;
     public Image poseRota;
     public Sprite[] poseRotarray;
-    private int numfondo = 0;
-    public GameObject muro;
-    
+    [Header("Fondo")]
+    public Image fondo;
+    public Sprite[] fondotochange;
+    private int numfondo = 0;    
 
 
     void Awake()
@@ -126,31 +129,33 @@ public class SimonSaysManager : MonoBehaviour
             playerIndex++;
             if (playerIndex >= simonSequence.Count)
             {  
-                playerTurn = false;
-                numfondo ++;
-                playerprueba.auto = true;
                 runner.sincrOk = true;
                 hudTXT.text = "Good :)";
-                PlayerStateManager.Instance.SwitchToRunner();
-                PlayerStateManager.Instance.dificultad+=2;
+                SalirSincro();
 
             }
         }
         else
         {
-            muro.SetActive(true);
-            playerTurn = false;
-            numfondo ++;
-            playerprueba.auto = true;
-            runner.sincrOk = false;
+            muroSano.SetActive(false);
+            muroRoto.SetActive(true);
             hudTXT.text = "Wrong :(";
-            PlayerStateManager.Instance.SwitchToRunner();
-            PlayerStateManager.Instance.dificultad+=2;
+            runner.sincrOk = false;
             if( PlayerStateManager.Instance.dificultad==9)
             {
                 SceneManager.LoadScene("Perder");
             }
-            
+            Invoke("SalirSincro", 2);
         }
+    }
+    void SalirSincro()
+    {
+        playerTurn = false;
+        numfondo ++;
+        playerprueba.auto = true;
+        muroSano.SetActive(true);
+        muroRoto.SetActive(false);
+        PlayerStateManager.Instance.SwitchToRunner();
+        PlayerStateManager.Instance.dificultad+=2;
     }
 }

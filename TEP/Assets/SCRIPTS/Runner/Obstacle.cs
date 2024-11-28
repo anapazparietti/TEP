@@ -8,9 +8,9 @@ public class Obstacle : MonoBehaviour
 
   private void OnTriggerEnter(Collider other) {
     if(other.CompareTag("Player")){
-      Destroy(gameObject);
       Instantiate(onDestroyEffect, transform.position, transform.rotation);
       Debug.Log("el jugador choco con un objeto");
+      Destroy(gameObject);
   }
 }
 
