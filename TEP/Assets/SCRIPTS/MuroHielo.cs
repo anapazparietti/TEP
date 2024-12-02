@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class MuroHielo : MonoBehaviour
 {
-    public GameObject succesEfect;
     public GameObject failEfect;
+    public Runner runner;
 
-  private void OnTriggerEnter(Collider other) {
-    if(other.CompareTag("Player")){
-    Debug.Log("el jugador pasa un muro");
-    Instantiate(succesEfect, transform.position, transform.rotation);
-    Destroy(gameObject);
+  private void OnTriggerEnter(Collider other) 
+  {
+    if(other.CompareTag("Player") && runner.sincrOk == false)
+    {
+     Instantiate(failEfect, transform.position, transform.rotation); 
+     Destroy(gameObject);
+    }
   }
-}
 }

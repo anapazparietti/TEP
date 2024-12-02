@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 public class SimonSaysManager : MonoBehaviour
 {
     public static SimonSaysManager instance;
+
+    [Header("Flechas")]
     public List<Image> colorButtons; // Lista de botones de colores
     public float flashDuration = 0.5f; // Duraci�n del destello
     public float delayBetweenFlashes = 0.5f; // Retraso entre flashes
@@ -16,7 +18,7 @@ public class SimonSaysManager : MonoBehaviour
     public TextMeshProUGUI hudTXT; //Texto para la interfaz y el feedback
     private List<int> simonSequence = new List<int>(); // Secuencia generada por Simon
     private int playerIndex = 0; // �ndice actual del jugador
-    private bool playerTurn = false; // Si es el turno del jugador
+    public bool playerTurn = false; 
     public Playerprueba playerprueba;
     public Runner runner;
     [Header("Muros Sanos")]
@@ -30,7 +32,9 @@ public class SimonSaysManager : MonoBehaviour
     [Header("Fondo")]
     public Image fondo;
     public Sprite[] fondotochange;
+    [Header("Huellas")]
     private int numfondo = 0;    
+    private int numPose = 0;
 
 
     void Awake()
@@ -62,7 +66,6 @@ public class SimonSaysManager : MonoBehaviour
     public void IniciarSimonDice(int secuenciaAmount2)
     {
         fondo.sprite = fondotochange[numfondo];
-        int numPose = Random.Range(0,posetochange.Length);
         pose.sprite = posetochange[numPose];
         poseRota.sprite = poseRotarray[numPose];
         secuenciaAmount = secuenciaAmount2;
@@ -87,13 +90,18 @@ public class SimonSaysManager : MonoBehaviour
             simonSequence.Add(Random.Range(0, colorButtons.Count));
         }
         StartCoroutine(PlaySimonSequence());
-       // hudTXT.text = "CPU turn!";
     }
 
     IEnumerator PlaySimonSequence()
     {
         playerTurn = false;
-        yield return new WaitForSeconds(1f);
+        if(PlayerStateManager.Instance.dificultad<=3)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }else
+        {
+          yield return new WaitForSeconds(0.5f);
+        }
 
         foreach (int index in simonSequence)
         {
@@ -114,7 +122,7 @@ public class SimonSaysManager : MonoBehaviour
     IEnumerator FlashCoroutine(Image image)
     {
         Color originalColor = image.color;
-        image.color = Color.black; // Cambia el color a negro 
+        image.color = Color.cyan; // Cambia el color a negro 
         yield return new WaitForSeconds(flashDuration);
         image.color = originalColor; // Restaura el color original
     }
@@ -141,7 +149,7 @@ public class SimonSaysManager : MonoBehaviour
             muroRoto.SetActive(true);
             hudTXT.text = "Wrong :(";
             runner.sincrOk = false;
-            if( PlayerStateManager.Instance.dificultad==9)
+          if( PlayerStateManager.Instance.dificultad==5)
             {
                 SceneManager.LoadScene("Perder");
             }
@@ -151,11 +159,24 @@ public class SimonSaysManager : MonoBehaviour
     void SalirSincro()
     {
         playerTurn = false;
-        numfondo ++;
+        if(numfondo<4)
+        {
+          numfondo ++;
+        }
+        if(numPose<3)
+        {
+          numPose ++;
+        }
         playerprueba.auto = true;
         muroSano.SetActive(true);
         muroRoto.SetActive(false);
         PlayerStateManager.Instance.SwitchToRunner();
-        PlayerStateManager.Instance.dificultad+=2;
+        if(PlayerStateManager.Instance.dificultad<3)
+        {
+         PlayerStateManager.Instance.dificultad+=2;
+        }else
+        {
+         PlayerStateManager.Instance.dificultad+=1;
+        }
     }
 }

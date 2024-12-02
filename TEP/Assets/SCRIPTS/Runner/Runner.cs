@@ -103,13 +103,14 @@ public class Runner : MonoBehaviour
     // ---- COLISIONES ----
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Obstacle") && !sincrOk)
+        if (other.CompareTag("Obstacle"))
         {
-            StartCoroutine(DisminuyeVelocidad(moveSpeed/2, 1f)); // Reduce velocidad a 5 por 2 segundos
+            Debug.Log("el jugador se choco");
+            StartCoroutine(DisminuyeVelocidad(moveSpeed/2, 1f)); 
         }
-        else if (other.CompareTag("Obstacle") && sincrOk)
+        if (other.CompareTag("MuroHielo") && sincrOk==false)
         {
-            AumentoVelocidad();
+          StartCoroutine(DisminuyeVelocidad(moveSpeed/3, 2f)); 
         }
     }
 

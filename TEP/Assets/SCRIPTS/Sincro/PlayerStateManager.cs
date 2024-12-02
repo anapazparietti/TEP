@@ -8,10 +8,9 @@ public class PlayerStateManager : MonoBehaviour
 
     private Runner runnerState;
     private Playerprueba flying;
-    
     public GameObject sincro;
-
     public int dificultad = 1;
+    public bool enSincro;
 
 
     private void Awake()
@@ -27,6 +26,7 @@ public class PlayerStateManager : MonoBehaviour
 
     public void SwitchToRunner()
     { 
+        enSincro = false;
         flying.enabled = true;
         sincro.SetActive(false);
         runnerState.enabled = true;
@@ -46,6 +46,7 @@ public class PlayerStateManager : MonoBehaviour
     }
     public void SwitchToSincro()
     {
+        enSincro = true;
         flying.enabled = false;
         runnerState.enabled = false;
         sincro.SetActive(true);
