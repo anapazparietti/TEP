@@ -6,7 +6,7 @@ public class Runner : MonoBehaviour
 {
     public static Runner Instance;
     public float moveSpeed = 0; 
-    public float limitSpeed = 300;
+    public float limitSpeed = 100;
     public float moveCostados = 9;
     private float lastInputTime = 0f; // Tiempo del último input de W
     private float lastIncreaseTime = 0f; // Tiempo del último aumento de velocidad
@@ -33,43 +33,23 @@ public class Runner : MonoBehaviour
         Debug.Log("La velocidad actual es de " + moveSpeed);
         Movimiento();
         VerificarInactividad(); // Verifica si ha pasado tiempo sin pulsar W
+        transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed, Space.World);
     }
 
     void Movimiento()
-    {
-        if (Input.GetKey(KeyCode.W))
+    {   
+            if (Input.GetKeyDown(KeyCode.W))
         {
-            lastInputTime = Time.time; // Registra el momento de la última pulsación
+            StopCoroutine(nameof(Desacelerar));
+            lastInputTime = Time.time;
 
-            if (Input.GetKeyDown(KeyCode.W)) 
+            if (Time.time - lastIncreaseTime > increaseInterval)
             {
-                isHoldingW = false; // No está en modo "mantener"
-                if (Time.time - lastIncreaseTime > increaseInterval)
-                {
-                    AumentoVelocidad();
-                    lastIncreaseTime = Time.time; // Actualiza el tiempo del último aumento
-                }
+                AumentoVelocidad();
+                lastIncreaseTime = Time.time; // Actualiza el tiempo del último aumento
             }
-            else
-            {
-                isHoldingW = true;
-            }
-
-            // Movimiento hacia adelante si la tecla no se mantiene presionada
-            if (!isHoldingW)
-            {
-                // Incremento progresivo de la velocidad
-                targetSpeed = Mathf.Min(limitSpeed, targetSpeed + 10); // Incrementa más rápido
-                moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, Time.deltaTime * 4); // Suaviza la aceleración (más rápida)
-                transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed, Space.World);
-            }
-        }
-        else
-        {
-            // Reducción progresiva de velocidad cuando no se presiona W
-            transform.Translate(Vector3.forward * Time.deltaTime * deslizar, Space.World);
-            targetSpeed = moveSpeed;
-            moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, Time.deltaTime * 10); // Suaviza la desaceleración (más lenta)
+            moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, Time.deltaTime * 5); // Suaviza la aceleración (más rápida)
+            Invoke(nameof(LlamarDesaceleramiento),3);
         }
 
         // Movimiento lateral
@@ -95,22 +75,24 @@ public class Runner : MonoBehaviour
     void VerificarInactividad()
     {
         // Si han pasado más de 1 segundo desde la última pulsación de W
-        if (Time.time - lastInputTime > 1f)
+        if (Time.time - lastInputTime > targetSpeed)
         {
-            if (moveSpeed > 10)
-            {
-                moveSpeed = Mathf.Max(8, moveSpeed - 2 * Time.deltaTime); // Reducir más lentamente
-            }
+           LlamarDesaceleramiento();
         }
     }
 
+void LlamarDesaceleramiento()
+{
+    Debug.Log("Llamando metodo");
+    StartCoroutine(nameof(Desacelerar));
+}
     // ---- CAMBIOS DE VELOCIDADES ----
     void AumentoVelocidad()
     {
         if (moveSpeed < limitSpeed)
         {
             Debug.Log("Al jugador se le aumenta la velocidad");
-            moveSpeed += 10; 
+            targetSpeed += 5f; 
         }
     }
 
@@ -126,6 +108,20 @@ public class Runner : MonoBehaviour
         {
             StartCoroutine(DisminuyeVelocidad(moveSpeed / 3, 2f)); 
         }
+    }
+
+IEnumerator Desacelerar()
+    {
+        Debug.Log("Llamando corutina");
+        while(moveSpeed>0)
+        {
+            moveSpeed -= 0.25f*Time.deltaTime;
+            if(moveSpeed<0)
+            {
+                moveSpeed=0;
+            }
+        }
+        yield return null;
     }
 
     // CORRUTINA PARA DISMINUIR LA VELOCIDAD

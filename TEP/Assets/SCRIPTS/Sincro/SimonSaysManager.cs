@@ -11,7 +11,7 @@ public class SimonSaysManager : MonoBehaviour
     public static SimonSaysManager instance;
 
     [Header("Flechas")]
-    public List<Image> colorButtons; // Lista de botones de colores
+    public List<GameObject> colorButtons; // Lista de botones de colores
     public float flashDuration = 0.5f; // Duraci�n del destello
     public float delayBetweenFlashes = 0.5f; // Retraso entre flashes
     private int secuenciaAmount;
@@ -108,7 +108,7 @@ public class SimonSaysManager : MonoBehaviour
 
         foreach (int index in simonSequence)
         {
-            FlashButton(colorButtons[index]);
+            PlayPressedAnimCPU(colorButtons[index]);
             yield return new WaitForSeconds(flashDuration + delayBetweenFlashes);
         }
 
@@ -119,25 +119,22 @@ public class SimonSaysManager : MonoBehaviour
         hudTXT.text = "¡Tu turno!";
     }
 
-    void FlashButton(Image image)
+    void PlayPressedAnim(GameObject obj)
     {
-        StartCoroutine(FlashCoroutine(image));
+       obj.GetComponent<Animator>().Play("pressed");
     }
 
-    IEnumerator FlashCoroutine(Image image)
+    void PlayPressedAnimCPU(GameObject obj)
     {
-        Color originalColor = image.color;
-        image.color = Color.cyan; // Cambia el color a negro 
-        yield return new WaitForSeconds(flashDuration);
-        image.color = originalColor; // Restaura el color original
+       obj.GetComponent<Animator>().Play("pressedCPU");
     }
 
     public void OnButtonPress(int buttonIndex)
     {
         if (!playerTurn) return;
-        StartCoroutine(FlashCoroutine(colorButtons[buttonIndex]));
+       PlayPressedAnim(colorButtons[buttonIndex]);
 
-        if (buttonIndex == simonSequence[playerIndex])
+        if (buttonIndex == simonSequence[playerIndex] && playerIndex<=simonSequence.Count)
         {
             playerIndex++;
             if (playerIndex >= simonSequence.Count)
