@@ -5,6 +5,7 @@ using UnityEngine;
 public class Runner : MonoBehaviour
 {
     public static Runner Instance;
+    public float numDesacelerar=0.3f;
     public float moveSpeed = 0; 
     public float limitSpeed = 100;
     public float moveCostados = 9;
@@ -32,24 +33,22 @@ public class Runner : MonoBehaviour
     {
         Debug.Log("La velocidad actual es de " + moveSpeed);
         Movimiento();
-        VerificarInactividad(); // Verifica si ha pasado tiempo sin pulsar W
+        VerificarInactividad();
+        moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, Time.deltaTime * 2); // Suaviza la transición
         transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed, Space.World);
     }
 
     void Movimiento()
     {   
-            if (Input.GetKeyDown(KeyCode.W))
+         if (Input.GetKey(KeyCode.W))
         {
-            StopCoroutine(nameof(Desacelerar));
-            lastInputTime = Time.time;
-
+            lastInputTime = Time.time; // Actualiza el tiempo del último input
+            StopCoroutine(nameof(Desacelerar)); // Detén la desaceleración, si está activa
             if (Time.time - lastIncreaseTime > increaseInterval)
             {
-                AumentoVelocidad();
-                lastIncreaseTime = Time.time; // Actualiza el tiempo del último aumento
+            AumentoVelocidad();
+            lastIncreaseTime = Time.time;
             }
-            moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, Time.deltaTime * 5); // Suaviza la aceleración (más rápida)
-            Invoke(nameof(LlamarDesaceleramiento),3);
         }
 
         // Movimiento lateral
@@ -73,13 +72,12 @@ public class Runner : MonoBehaviour
     }
 
     void VerificarInactividad()
+{
+    if (Time.time - lastInputTime > 3f) // Verifica si pasan 3 segundos sin input
     {
-        // Si han pasado más de 1 segundo desde la última pulsación de W
-        if (Time.time - lastInputTime > targetSpeed)
-        {
-           LlamarDesaceleramiento();
-        }
+        LlamarDesaceleramiento();
     }
+}
 
 void LlamarDesaceleramiento()
 {
@@ -87,14 +85,15 @@ void LlamarDesaceleramiento()
     StartCoroutine(nameof(Desacelerar));
 }
     // ---- CAMBIOS DE VELOCIDADES ----
-    void AumentoVelocidad()
+void AumentoVelocidad()
+{
+    if (moveSpeed < limitSpeed)
     {
-        if (moveSpeed < limitSpeed)
-        {
-            Debug.Log("Al jugador se le aumenta la velocidad");
-            targetSpeed += 5f; 
-        }
+        targetSpeed += 1f; // Aumenta la velocidad objetivo de forma gradual
+        if (targetSpeed > limitSpeed) targetSpeed = limitSpeed; // Limita la velocidad máxima
+        Debug.Log("Aumentando velocidad objetivo: " + targetSpeed);
     }
+}
 
     // ---- COLISIONES ----
     private void OnTriggerEnter(Collider other)
@@ -115,7 +114,7 @@ IEnumerator Desacelerar()
         Debug.Log("Llamando corutina");
         while(moveSpeed>0)
         {
-            moveSpeed -= 0.25f*Time.deltaTime;
+            moveSpeed -= numDesacelerar*Time.deltaTime;
             if(moveSpeed<0)
             {
                 moveSpeed=0;

@@ -23,10 +23,10 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 1.31
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubtractiveShadowColor: {r: 1, g: 1, b: 1, a: 1}
+  m_SkyboxMaterial: {fileID: 2100000, guid: ddbcbb3899687ea469ed4a5fce1532df, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -2566,6 +2566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d92ea7764fa18a49b4dff313edf8837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numDesacelerar: 0.222222
   moveSpeed: 10
   limitSpeed: 40
   moveCostados: 5
@@ -3714,7 +3715,7 @@ GameObject:
   - component: {fileID: 410087040}
   - component: {fileID: 410087042}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: Luzfondo1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3730,8 +3731,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Color: {r: 0.7528302, g: 1, b: 0.9346791, a: 1}
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3774,8 +3775,8 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 5000
-  m_UseColorTemperature: 1
+  m_ColorTemperature: 6726
+  m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
@@ -3793,13 +3794,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.39002618, y: -0.23678161, z: 0.104507186, w: 0.8836811}
+  m_LocalPosition: {x: 0.17, y: 6.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 47.63, y: -30, z: 0}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6584,7 +6585,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &638605383
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11076,6 +11077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d92ea7764fa18a49b4dff313edf8837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numDesacelerar: 0.3
   moveSpeed: 0
   limitSpeed: 200
   moveCostados: 5
@@ -17428,9 +17430,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 07e0f143749471149ba1f5aa390db9ce, type: 3}
   fondo: {fileID: 1547627837}
   fondotochange:
+  - {fileID: 21300000, guid: 57a0e367c70b36c4dbf74bbc5f07a12e, type: 3}
   - {fileID: 21300000, guid: fb76c076718a68a4580b98fcc308470d, type: 3}
   - {fileID: 21300000, guid: dbc01482507ce49469680bb5c74debb7, type: 3}
-  - {fileID: 21300000, guid: b936bc597b764ce4da45e7d292ae3986, type: 3}
   - {fileID: 21300000, guid: b936bc597b764ce4da45e7d292ae3986, type: 3}
 --- !u!4 &2076195105
 Transform:
