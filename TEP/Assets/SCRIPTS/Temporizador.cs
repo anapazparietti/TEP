@@ -37,23 +37,15 @@ public class Temporizador : MonoBehaviour
             tiempo.text = string.Format("{0:00}:{1:00}", tempMin, tempSeg);
         }
 
-        if(PlayerStateManager.Instance.enSincro == true)
+        if(PlayerStateManager.Instance.enSincro == true && simonSays.playerTurn == false)
         {
-          if(simonSays.playerTurn == false)
-          {
             Debug.Log("Tiempo en pausa");
             PararTiempo();
-          }
-        }
-        if(PlayerStateManager.Instance.enSincro == false)
+        } else
         {
-            Debug.Log("el tiempo continua");
-          if(simonSays.playerTurn == true)
-          {
-            Debug.Log("el tiempo se reanuda");
-            ReanudarTiempo();
-          }
-        }
+           Debug.Log("Vuelve tiempo");
+           ReanudarTiempo();
+        } 
        
         /*
         if (Input.GetKeyDown(KeyCode.P))

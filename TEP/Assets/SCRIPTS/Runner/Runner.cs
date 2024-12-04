@@ -5,16 +5,19 @@ using UnityEngine;
 public class Runner : MonoBehaviour
 {
     public static Runner Instance;
-    public float moveSpeed = 10; 
-    public float limitSpeed = 100;
+    public float moveSpeed = 0; 
+    public float limitSpeed = 300;
     public float moveCostados = 9;
     private float lastInputTime = 0f; // Tiempo del último input de W
     private float lastIncreaseTime = 0f; // Tiempo del último aumento de velocidad
     public float increaseInterval = 1f; // Intervalo para aumentar velocidad
     private bool isHoldingW = false; // Indica si la tecla W está siendo mantenida
     public bool sincrOk;
+    private float targetSpeed = 0f; // Velocidad objetivo para un movimiento progresivo
+    private float deslizar = 1f;
 
     private Rigidbody jugador;
+
     void Start()
     {
         jugador = gameObject.GetComponent<Rigidbody>();
@@ -22,10 +25,10 @@ public class Runner : MonoBehaviour
 
     void Update()
     {
-       RunnerUpdate();
+        RunnerUpdate();
     }
 
-   public void RunnerUpdate()
+    public void RunnerUpdate()
     {
         Debug.Log("La velocidad actual es de " + moveSpeed);
         Movimiento();
@@ -33,7 +36,7 @@ public class Runner : MonoBehaviour
     }
 
     void Movimiento()
-    {   
+    {
         if (Input.GetKey(KeyCode.W))
         {
             lastInputTime = Time.time; // Registra el momento de la última pulsación
@@ -42,7 +45,7 @@ public class Runner : MonoBehaviour
             {
                 isHoldingW = false; // No está en modo "mantener"
                 if (Time.time - lastIncreaseTime > increaseInterval)
-                {//Input.
+                {
                     AumentoVelocidad();
                     lastIncreaseTime = Time.time; // Actualiza el tiempo del último aumento
                 }
@@ -55,37 +58,48 @@ public class Runner : MonoBehaviour
             // Movimiento hacia adelante si la tecla no se mantiene presionada
             if (!isHoldingW)
             {
+                // Incremento progresivo de la velocidad
+                targetSpeed = Mathf.Min(limitSpeed, targetSpeed + 10); // Incrementa más rápido
+                moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, Time.deltaTime * 4); // Suaviza la aceleración (más rápida)
                 transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed, Space.World);
             }
         }
-
-         //izquierda
-       if(Input.GetKey(KeyCode.A))
-       {
-        //----para delimitar que el jugador no pase los límites de la pista
-        if(this.gameObject.transform.position.x > LevelBoundary.leftSide){
-            Debug.Log("el jugador se mueve a la izquierda");
-            transform.Translate(Vector3.left * Time.deltaTime * moveCostados);
-        }
-       }
-       if(Input.GetKey(KeyCode.D))
-       { 
-        if(this.gameObject.transform.position.x < LevelBoundary.rightSide)
+        else
         {
-            Debug.Log("el jugador se mueve a la derecha");
-            transform.Translate(Vector3.left * Time.deltaTime * moveCostados * -1);
+            // Reducción progresiva de velocidad cuando no se presiona W
+            transform.Translate(Vector3.forward * Time.deltaTime * deslizar, Space.World);
+            targetSpeed = moveSpeed;
+            moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, Time.deltaTime * 10); // Suaviza la desaceleración (más lenta)
         }
-       }
+
+        // Movimiento lateral
+        if (Input.GetKey(KeyCode.A))
+        {
+            if (this.gameObject.transform.position.x > LevelBoundary.leftSide)
+            {
+                Debug.Log("el jugador se mueve a la izquierda");
+                transform.Translate(Vector3.left * Time.deltaTime * moveCostados);
+            }
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            if (this.gameObject.transform.position.x < LevelBoundary.rightSide)
+            {
+                Debug.Log("el jugador se mueve a la derecha");
+                transform.Translate(Vector3.left * Time.deltaTime * moveCostados * -1);
+            }
+        }
     }
 
     void VerificarInactividad()
     {
-        // Si han pasado más de 2 segundos desde la última pulsación de W
+        // Si han pasado más de 1 segundo desde la última pulsación de W
         if (Time.time - lastInputTime > 1f)
         {
             if (moveSpeed > 10)
             {
-                moveSpeed = Mathf.Max(8, moveSpeed - 4 * Time.deltaTime); // Reducir gradualmente
+                moveSpeed = Mathf.Max(8, moveSpeed - 2 * Time.deltaTime); // Reducir más lentamente
             }
         }
     }
@@ -96,7 +110,7 @@ public class Runner : MonoBehaviour
         if (moveSpeed < limitSpeed)
         {
             Debug.Log("Al jugador se le aumenta la velocidad");
-            moveSpeed += 20; 
+            moveSpeed += 10; 
         }
     }
 
@@ -106,11 +120,11 @@ public class Runner : MonoBehaviour
         if (other.CompareTag("Obstacle"))
         {
             Debug.Log("el jugador se choco");
-            StartCoroutine(DisminuyeVelocidad(moveSpeed/2, 1f)); 
+            StartCoroutine(DisminuyeVelocidad(moveSpeed / 2, 1f)); 
         }
-        if (other.CompareTag("MuroHielo") && sincrOk==false)
+        if (other.CompareTag("MuroHielo") && sincrOk == false)
         {
-          StartCoroutine(DisminuyeVelocidad(moveSpeed/3, 2f)); 
+            StartCoroutine(DisminuyeVelocidad(moveSpeed / 3, 2f)); 
         }
     }
 
@@ -120,7 +134,7 @@ public class Runner : MonoBehaviour
         Debug.Log("La velocidad se reduce temporalmente");
         moveSpeed = nuevaVelocidad;
         yield return new WaitForSeconds(duracion);
-        moveSpeed = moveSpeed/2;
+        moveSpeed = moveSpeed / 2;
         Debug.Log("Velocidad restaurada");
     }
 }

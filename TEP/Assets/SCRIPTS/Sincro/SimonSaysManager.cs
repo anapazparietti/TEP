@@ -15,6 +15,9 @@ public class SimonSaysManager : MonoBehaviour
     public float flashDuration = 0.5f; // Duraci�n del destello
     public float delayBetweenFlashes = 0.5f; // Retraso entre flashes
     private int secuenciaAmount;
+    public GameObject escenaSincro;
+    public GameObject dinoCaja;
+    public GameObject texto;
     public TextMeshProUGUI hudTXT; //Texto para la interfaz y el feedback
     private List<int> simonSequence = new List<int>(); // Secuencia generada por Simon
     private int playerIndex = 0; // �ndice actual del jugador
@@ -65,12 +68,12 @@ public class SimonSaysManager : MonoBehaviour
 
     public void IniciarSimonDice(int secuenciaAmount2)
     {
+        escenaSincro.SetActive(true);
         fondo.sprite = fondotochange[numfondo];
         pose.sprite = posetochange[numPose];
         poseRota.sprite = poseRotarray[numPose];
         secuenciaAmount = secuenciaAmount2;
         StartCoroutine(StartGame());
-        hudTXT.text = "CPU turn!";
     }
 
     IEnumerator StartGame()
@@ -111,7 +114,9 @@ public class SimonSaysManager : MonoBehaviour
 
         playerIndex = 0;
         playerTurn = true;
-        hudTXT.text = "Player turn!";
+        dinoCaja.SetActive(true);
+        texto.SetActive(true);
+        hudTXT.text = "¡Tu turno!";
     }
 
     void FlashButton(Image image)
@@ -138,16 +143,17 @@ public class SimonSaysManager : MonoBehaviour
             if (playerIndex >= simonSequence.Count)
             {  
                 runner.sincrOk = true;
-                hudTXT.text = "Good :)";
-                SalirSincro();
+                hudTXT.text = "Bien hecho";
+               Invoke("SalirSincro", 2);
 
             }
         }
         else
         {
+            dinoCaja.SetActive(false);
+            texto.SetActive(false);
             muroSano.SetActive(false);
             muroRoto.SetActive(true);
-            hudTXT.text = "Wrong :(";
             runner.sincrOk = false;
           if( PlayerStateManager.Instance.dificultad==5)
             {
@@ -158,6 +164,7 @@ public class SimonSaysManager : MonoBehaviour
     }
     void SalirSincro()
     {
+        escenaSincro.SetActive(false);
         playerTurn = false;
         if(numfondo<4)
         {
@@ -167,6 +174,8 @@ public class SimonSaysManager : MonoBehaviour
         {
           numPose ++;
         }
+        dinoCaja.SetActive(false);
+        texto.SetActive(false);
         playerprueba.auto = true;
         muroSano.SetActive(true);
         muroRoto.SetActive(false);
