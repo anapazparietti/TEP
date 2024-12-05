@@ -9,7 +9,7 @@ public class PlayerStateManager : MonoBehaviour
     private Runner runnerState;
     private Playerprueba flying;
     public GameObject sincro;
-    public int dificultad = 1;
+    public int dificultad = 0;
     public bool enSincro;
 
 

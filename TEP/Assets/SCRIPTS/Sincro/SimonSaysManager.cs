@@ -105,7 +105,7 @@ public class SimonSaysManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }else
         {
-          yield return new WaitForSeconds(0.5f);
+          yield return new WaitForSeconds(0.1f);
         }
 
         foreach (int index in simonSequence)
@@ -131,36 +131,59 @@ public class SimonSaysManager : MonoBehaviour
        obj.GetComponent<Animator>().Play("pressedCPU");
     }
 
-    public void OnButtonPress(int buttonIndex)
+   public void OnButtonPress(int buttonIndex)
+{
+    if (!playerTurn) return;
+
+    // Validar el índice del botón
+    if (buttonIndex < 0 || buttonIndex >= colorButtons.Count)
     {
-        if (!playerTurn) return;
-       PlayPressedAnim(colorButtons[buttonIndex]);
+        Debug.LogWarning($"buttonIndex fuera de rango: {buttonIndex}. Tamaño de colorButtons: {colorButtons.Count}");
+        return;
+    }
 
-        if (buttonIndex == simonSequence[playerIndex] && playerIndex<=simonSequence.Count)
-        {
-            playerIndex++;
-            if (playerIndex >= simonSequence.Count)
-            {  
-                runner.sincrOk = true;
-                hudTXT.text = "Bien hecho";
-               Invoke("SalirSincro", 2);
+    // Ejecutar animación del botón presionado
+    PlayPressedAnim(colorButtons[buttonIndex]);
 
-            }
-        }
-        else
+    // Validar el índice del jugador antes de acceder a simonSequence
+    if (playerIndex < 0 || playerIndex >= simonSequence.Count)
+    {
+        Debug.LogError($"playerIndex fuera de rango: {playerIndex}. Tamaño de simonSequence: {simonSequence.Count}");
+        return;
+    }
+
+    // Comparar el botón presionado con la secuencia
+    if (buttonIndex == simonSequence[playerIndex])
+    {
+      //  playerIndex++;
+        // Verificar si el jugador ha completado toda la secuencia
+        if (playerIndex == simonSequence.Count)
         {
-            dinoCaja.SetActive(false);
-            texto.SetActive(false);
-            muroSano.SetActive(false);
-            muroRoto.SetActive(true);
-            runner.sincrOk = false;
-          if( PlayerStateManager.Instance.dificultad==5)
-            {
-                SceneManager.LoadScene("Perder");
-            }
+            Debug.Log("Secuencia completada correctamente");
+            runner.sincrOk = true;
+            hudTXT.text = "¡Bien hecho!";
             Invoke("SalirSincro", 2);
+            return;
         }
     }
+    else
+    {
+        // El jugador falló en la secuencia
+        Debug.LogWarning("Secuencia incorrecta");
+        dinoCaja.SetActive(false);
+        texto.SetActive(false);
+        muroSano.SetActive(false);
+        muroRoto.SetActive(true);
+        runner.sincrOk = false;
+
+        if (PlayerStateManager.Instance.dificultad == 5)
+        {
+            SceneManager.LoadScene("Perder");
+        }
+        Invoke("SalirSincro", 2);
+    }
+}
+
     void SalirSincro()
     {
         escenaSincro.SetActive(false);
