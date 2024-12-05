@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class SimonSaysManager : MonoBehaviour
 {
     public static SimonSaysManager instance;
+    public bool sincrOn;
 
     [Header("Flechas")]
     public List<GameObject> colorButtons; // Lista de botones de colores
@@ -36,7 +37,6 @@ public class SimonSaysManager : MonoBehaviour
     public Image fondo;
     public Sprite[] fondotochange;
     [Header("Huellas")]
-    private int numfondo = 0;    
     private int numPose = 0;
 
 
@@ -47,6 +47,7 @@ public class SimonSaysManager : MonoBehaviour
 
     private void Update()
     {
+        //se debe bloquear la tecla w en el sincro
         if(Input.GetKeyDown(KeyCode.A))            
         {
             OnButtonPress(0);
@@ -68,8 +69,9 @@ public class SimonSaysManager : MonoBehaviour
 
     public void IniciarSimonDice(int secuenciaAmount2)
     {
+        sincrOn = true;
         escenaSincro.SetActive(true);
-        fondo.sprite = fondotochange[numfondo];
+        fondo.sprite = fondotochange[numPose];
         pose.sprite = posetochange[numPose];
         poseRota.sprite = poseRotarray[numPose];
         secuenciaAmount = secuenciaAmount2;
@@ -163,11 +165,7 @@ public class SimonSaysManager : MonoBehaviour
     {
         escenaSincro.SetActive(false);
         playerTurn = false;
-        if(numfondo<4)
-        {
-          numfondo ++;
-        }
-        if(numPose<3)
+        if(numPose<4)
         {
           numPose ++;
         }

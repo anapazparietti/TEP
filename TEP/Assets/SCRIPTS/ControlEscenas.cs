@@ -19,6 +19,10 @@ public class Inicio : MonoBehaviour
     {
      Invoke("EscenaJuego",12);
     }
+    if(currentScene.name == "Inicio" && Input.GetKey(KeyCode.W))
+    {
+      EscenaJuego();
+    }
   }
   
   public void Cinematica()
@@ -30,7 +34,7 @@ public class Inicio : MonoBehaviour
    SceneManager.LoadScene("Juego");
   }
   public void Reiniciar()
-  {
+  {//agregar
    SceneManager.LoadScene("Inicio");
   }
 }

@@ -46,12 +46,6 @@ public class Temporizador : MonoBehaviour
            Debug.Log("Vuelve tiempo");
            ReanudarTiempo();
         } 
-       
-        /*
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            AlternarMovimiento();
-        }*/
     }
     public void PararTiempo()
     {

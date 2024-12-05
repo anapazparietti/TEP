@@ -12,10 +12,10 @@ public class Runner : MonoBehaviour
     private float lastInputTime = 0f; // Tiempo del último input de W
     private float lastIncreaseTime = 0f; // Tiempo del último aumento de velocidad
     public float increaseInterval = 1f; // Intervalo para aumentar velocidad
-    private bool isHoldingW = false; // Indica si la tecla W está siendo mantenida
+    //private bool isHoldingW = false; // Indica si la tecla W está siendo mantenida
     public bool sincrOk;
     private float targetSpeed = 0f; // Velocidad objetivo para un movimiento progresivo
-    private float deslizar = 1f;
+    //private float deslizar = 1f;
 
     private Rigidbody jugador;
 
