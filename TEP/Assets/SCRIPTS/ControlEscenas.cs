@@ -7,8 +7,7 @@ using UnityEngine.Video;
 public class Inicio : MonoBehaviour
 {
  private Scene currentScene;
- public VideoPlayer vid;
-  void Update()
+   void Update()
   {
     currentScene = SceneManager.GetActiveScene();
     if (currentScene.name == "Ganar" || currentScene.name == "Perder")
@@ -21,7 +20,7 @@ public class Inicio : MonoBehaviour
     }
     if(currentScene.name == "Inicio" && Input.GetKey(KeyCode.W))
     {
-      EscenaJuego();
+     Cinematica();
     }
   }
   

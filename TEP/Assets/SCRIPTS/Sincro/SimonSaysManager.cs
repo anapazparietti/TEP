@@ -37,7 +37,9 @@ public class SimonSaysManager : MonoBehaviour
     public Image fondo;
     public Sprite[] fondotochange;
     [Header("Huellas")]
-    private int numPose = 0;
+    public int numPose = 0;
+    public Tutorial tutorial;
+    private bool tutoHecho;
 
 
     void Awake()
@@ -69,6 +71,12 @@ public class SimonSaysManager : MonoBehaviour
 
     public void IniciarSimonDice(int secuenciaAmount2)
     {
+        if(!tutoHecho)
+        {
+        tutorial.IniciarTutorialSincro();
+        tutoHecho = true;
+        }
+
         sincrOn = true;
         escenaSincro.SetActive(true);
         fondo.sprite = fondotochange[numPose];
@@ -76,6 +84,10 @@ public class SimonSaysManager : MonoBehaviour
         poseRota.sprite = poseRotarray[numPose];
         secuenciaAmount = secuenciaAmount2;
         StartCoroutine(StartGame());
+        if(numPose<4)
+        {
+          numPose ++;
+        }
     }
 
     IEnumerator StartGame()
@@ -99,6 +111,7 @@ public class SimonSaysManager : MonoBehaviour
 
     IEnumerator PlaySimonSequence()
     {
+        playerIndex = 0;
         playerTurn = false;
         if(PlayerStateManager.Instance.dificultad<=3)
         {
@@ -114,7 +127,7 @@ public class SimonSaysManager : MonoBehaviour
             yield return new WaitForSeconds(flashDuration + delayBetweenFlashes);
         }
 
-        playerIndex = 0;
+       
         playerTurn = true;
         dinoCaja.SetActive(true);
         texto.SetActive(true);
@@ -135,27 +148,14 @@ public class SimonSaysManager : MonoBehaviour
 {
     if (!playerTurn) return;
 
-    // Validar el índice del botón
-    if (buttonIndex < 0 || buttonIndex >= colorButtons.Count)
-    {
-        Debug.LogWarning($"buttonIndex fuera de rango: {buttonIndex}. Tamaño de colorButtons: {colorButtons.Count}");
-        return;
-    }
-
     // Ejecutar animación del botón presionado
     PlayPressedAnim(colorButtons[buttonIndex]);
-
-    // Validar el índice del jugador antes de acceder a simonSequence
-    if (playerIndex < 0 || playerIndex >= simonSequence.Count)
-    {
-        Debug.LogError($"playerIndex fuera de rango: {playerIndex}. Tamaño de simonSequence: {simonSequence.Count}");
-        return;
-    }
-
+if(playerIndex<simonSequence.Count)
+{
     // Comparar el botón presionado con la secuencia
-    if (buttonIndex == simonSequence[playerIndex])
+    if (buttonIndex == simonSequence[playerIndex]) 
     {
-      //  playerIndex++;
+      playerIndex++;
         // Verificar si el jugador ha completado toda la secuencia
         if (playerIndex == simonSequence.Count)
         {
@@ -183,15 +183,14 @@ public class SimonSaysManager : MonoBehaviour
         Invoke("SalirSincro", 2);
     }
 }
+    
+}
 
     void SalirSincro()
     {
+        playerIndex=0;
         escenaSincro.SetActive(false);
         playerTurn = false;
-        if(numPose<4)
-        {
-          numPose ++;
-        }
         dinoCaja.SetActive(false);
         texto.SetActive(false);
         playerprueba.auto = true;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class Runner : MonoBehaviour
     //private bool isHoldingW = false; // Indica si la tecla W está siendo mantenida
     public bool sincrOk;
     private float targetSpeed = 0f; // Velocidad objetivo para un movimiento progresivo
-    //private float deslizar = 1f;
+    public float aumentarVelocidad = 1f;
 
     private Rigidbody jugador;
 
@@ -40,7 +41,7 @@ public class Runner : MonoBehaviour
 
     void Movimiento()
     {   
-         if (Input.GetKey(KeyCode.W))
+         if (Input.GetKeyDown(KeyCode.W))
         {
             lastInputTime = Time.time; // Actualiza el tiempo del último input
             StopCoroutine(nameof(Desacelerar)); // Detén la desaceleración, si está activa
@@ -89,7 +90,7 @@ void AumentoVelocidad()
 {
     if (moveSpeed < limitSpeed)
     {
-        targetSpeed += 1f; // Aumenta la velocidad objetivo de forma gradual
+        targetSpeed += aumentarVelocidad; // Aumenta la velocidad objetivo de forma gradual
         if (targetSpeed > limitSpeed) targetSpeed = limitSpeed; // Limita la velocidad máxima
         Debug.Log("Aumentando velocidad objetivo: " + targetSpeed);
     }
@@ -101,35 +102,33 @@ void AumentoVelocidad()
         if (other.CompareTag("Obstacle"))
         {
             Debug.Log("el jugador se choco");
-            StartCoroutine(DisminuyeVelocidad(moveSpeed / 2, 1f)); 
+            DisminuyeVelocidad(); 
         }
         if (other.CompareTag("MuroHielo") && sincrOk == false)
         {
-            StartCoroutine(DisminuyeVelocidad(moveSpeed / 3, 2f)); 
+            DisminuyeVelocidad(); 
         }
     }
 
 IEnumerator Desacelerar()
     {
         Debug.Log("Llamando corutina");
-        while(moveSpeed>0)
+        while(targetSpeed>0)
         {
-            moveSpeed -= numDesacelerar*Time.deltaTime;
-            if(moveSpeed<0)
+            targetSpeed -= numDesacelerar*Time.deltaTime;
+            if(targetSpeed<0)
             {
-                moveSpeed=0;
+               targetSpeed=0;
             }
         }
         yield return null;
     }
 
     // CORRUTINA PARA DISMINUIR LA VELOCIDAD
-    IEnumerator DisminuyeVelocidad(float nuevaVelocidad, float duracion)
+    void DisminuyeVelocidad()
     {
-        Debug.Log("La velocidad se reduce temporalmente");
-        moveSpeed = nuevaVelocidad;
-        yield return new WaitForSeconds(duracion);
-        moveSpeed = moveSpeed / 2;
-        Debug.Log("Velocidad restaurada");
+        Debug.Log("La velocidad se reduce");
+        targetSpeed = targetSpeed/2;
+        moveSpeed = targetSpeed;
     }
 }

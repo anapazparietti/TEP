@@ -1,4 +1,3 @@
-/*
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -6,52 +5,42 @@ using System.Collections;
 using Unity.VisualScripting;
 public class Tutorial : MonoBehaviour
 {
-    public GameObject tutorial;
     public Image cuadro;
     public Sprite[] cuadroChange;
-    private int numCuadro = 0;
-    public SimonSaysManager simonSays;
-    public bool TutOn;
+    public float segundos=1;
+    public GameObject tutorialMov;
+    public GameObject tutoSincro;
 
     void Start()
     {
-       tutorial.SetActive(true);
+       StartCoroutine(nameof(IniciarTutorial));
     }
 
-    void Update()
+   IEnumerator IniciarTutorial()
+   {
+    tutorialMov.SetActive(true);
+    Time.timeScale = 0;
+    for(int i=0; i<cuadroChange.Length; i++)
     {
-        StartCoroutine(CambioCuadro());
-        TutorialSincro();
-        cuadro.sprite = cuadroChange[numCuadro];
-        if(numCuadro==3 || numCuadro==4)
-        {
-            StartCoroutine(SalirTuto());
-        }
+        yield return new WaitForSecondsRealtime(segundos);
+        cuadro.sprite= cuadroChange[i];
+    }
+    Time.timeScale = 1;
 
-    }
-    IEnumerator SalirTuto()
-    {
-        yield return new WaitForSeconds(1f);
-        TutOn = false;
-        tutorial.SetActive(false);
-    }
-    IEnumerator CambioCuadro()
-    {
-        for (int i = 0; i < 3; i++) 
-        {
-            yield return new WaitForSeconds(1f);
-            numCuadro = 1;
-        }
-    }
-
-    public void TutorialSincro()
-    {
-        if(simonSays.sincrOn == true && simonSays.numfondo == 0) 
-        {
-            TutOn = true;
-            numCuadro=4;
-        }
-    }
-
+   tutorialMov.SetActive(false);
+   }
+ 
+IEnumerator TutorialSincro()
+{
+ Time.timeScale = 0;
+ tutoSincro.SetActive(true);
+ yield return new WaitForSecondsRealtime(segundos);
+ Time.timeScale = 1;
+ tutoSincro.SetActive(false);
 }
-*/
+
+public void IniciarTutorialSincro()
+{
+    StartCoroutine(TutorialSincro());
+}
+}

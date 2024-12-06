@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class Temporizador : MonoBehaviour
 {
+    
     [SerializeField] int min, seg;
     [SerializeField] Text tiempo;
 
@@ -55,9 +56,5 @@ public class Temporizador : MonoBehaviour
     {
       enMovimiento = true;
     } 
-/*    public void AlternarMovimiento()
-    {
-        enMovimiento = !enMovimiento;
-    }
-    */
+
 }
