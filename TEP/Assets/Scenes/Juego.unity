@@ -12631,7 +12631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f5749eeee1f984aaf84bd8a7f7229b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  min: 3
+  min: 2
   seg: 30
   tiempo: {fileID: 1902815381}
   simonSays: {fileID: 2076195104}
