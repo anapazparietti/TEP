@@ -13,7 +13,6 @@ public class Runner : MonoBehaviour
     private float lastInputTime = 0f; // Tiempo del último input de W
     private float lastIncreaseTime = 0f; // Tiempo del último aumento de velocidad
     public float increaseInterval = 1f; // Intervalo para aumentar velocidad
-    //private bool isHoldingW = false; // Indica si la tecla W está siendo mantenida
     public bool sincrOk;
     private float targetSpeed = 0f; // Velocidad objetivo para un movimiento progresivo
     public float aumentarVelocidad = 1f;
@@ -41,7 +40,7 @@ public class Runner : MonoBehaviour
 
     void Movimiento()
     {   
-         if (Input.GetKeyDown(KeyCode.W))
+         if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E))
         {
             lastInputTime = Time.time; // Actualiza el tiempo del último input
             StopCoroutine(nameof(Desacelerar)); // Detén la desaceleración, si está activa

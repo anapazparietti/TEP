@@ -4,9 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
-public class Inicio : MonoBehaviour
+public class ControlEscenas : MonoBehaviour
 {
+ public static ControlEscenas Instance;
  private Scene currentScene;
+ void Awake()
+    {
+        Instance = this;
+    }
    void Update()
   {
     currentScene = SceneManager.GetActiveScene();
@@ -18,12 +23,29 @@ public class Inicio : MonoBehaviour
     {
      Invoke("EscenaJuego",12);
     }
-    if(currentScene.name == "Inicio" && Input.GetKey(KeyCode.W))
+    if(currentScene.name == "Inicio" && Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.E))
     {
      Cinematica();
     }
   }
-  
+  public void Perder()
+  {
+    StartCoroutine(nameof(Perdiendo));
+  }
+  IEnumerator Perdiendo()
+  {
+    yield return new WaitForSecondsRealtime(2);
+    SceneManager.LoadScene("Perder");
+  }
+  public void Ganar()
+  {
+    StartCoroutine(nameof(Ganando));
+  }
+  IEnumerator Ganando()
+  {
+    yield return new WaitForSecondsRealtime(2);
+    SceneManager.LoadScene("Ganar");
+  }
   public void Cinematica()
   {
     SceneManager.LoadScene("Cinematica");

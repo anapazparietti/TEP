@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 
 public class SimonSaysManager : MonoBehaviour
 {
     public static SimonSaysManager instance;
-    public bool sincrOn;
-
+    public Playerprueba playerprueba;
+    public Runner runner;
+    public PlayerStateManager playerStateManager;
     [Header("Flechas")]
     public List<GameObject> colorButtons; // Lista de botones de colores
     public float flashDuration = 0.5f; // Duraci�n del destello
@@ -23,8 +23,6 @@ public class SimonSaysManager : MonoBehaviour
     private List<int> simonSequence = new List<int>(); // Secuencia generada por Simon
     private int playerIndex = 0; // �ndice actual del jugador
     public bool playerTurn = false; 
-    public Playerprueba playerprueba;
-    public Runner runner;
     [Header("Muros Sanos")]
     public GameObject muroSano;
     public Image pose;
@@ -40,8 +38,6 @@ public class SimonSaysManager : MonoBehaviour
     public int numPose = 0;
     public Tutorial tutorial;
     private bool tutoHecho;
-
-
     void Awake()
     {
         instance = this;
@@ -54,7 +50,7 @@ public class SimonSaysManager : MonoBehaviour
         {
             OnButtonPress(0);
         }
-        else if (Input.GetKeyDown(KeyCode.T))
+        else if (Input.GetKeyDown(KeyCode.W))
         {
             OnButtonPress(1);
         }
@@ -77,7 +73,6 @@ public class SimonSaysManager : MonoBehaviour
         tutoHecho = true;
         }
 
-        sincrOn = true;
         escenaSincro.SetActive(true);
         fondo.sprite = fondotochange[numPose];
         pose.sprite = posetochange[numPose];
@@ -106,6 +101,9 @@ public class SimonSaysManager : MonoBehaviour
         {
             simonSequence.Add(Random.Range(0, colorButtons.Count));
         }
+        dinoCaja.SetActive(true);
+        texto.SetActive(true);
+        hudTXT.text = "Espera...";
         StartCoroutine(PlaySimonSequence());
     }
 
@@ -113,7 +111,7 @@ public class SimonSaysManager : MonoBehaviour
     {
         playerIndex = 0;
         playerTurn = false;
-        if(PlayerStateManager.Instance.dificultad<=3)
+        if(playerStateManager.dificultad<=3)
         {
             yield return new WaitForSeconds(0.5f);
         }else
@@ -161,9 +159,13 @@ if(playerIndex<simonSequence.Count)
         {
             Debug.Log("Secuencia completada correctamente");
             runner.sincrOk = true;
-            hudTXT.text = "¡Bien hecho!";
+            hudTXT.text = "¡Bien!";
+            if (playerStateManager.dificultad == 5)
+        {
+            ControlEscenas.Instance.Ganar();
+        }
             Invoke("SalirSincro", 2);
-            return;
+            return;   
         }
     }
     else
@@ -176,11 +178,12 @@ if(playerIndex<simonSequence.Count)
         muroRoto.SetActive(true);
         runner.sincrOk = false;
 
-        if (PlayerStateManager.Instance.dificultad == 5)
+        if (playerStateManager.dificultad == 5)
         {
-            SceneManager.LoadScene("Perder");
+            ControlEscenas.Instance.Perder();
         }
         Invoke("SalirSincro", 2);
+        return;   
     }
 }
     
@@ -196,13 +199,13 @@ if(playerIndex<simonSequence.Count)
         playerprueba.auto = true;
         muroSano.SetActive(true);
         muroRoto.SetActive(false);
-        PlayerStateManager.Instance.SwitchToRunner();
-        if(PlayerStateManager.Instance.dificultad<3)
+        playerStateManager.SwitchToRunner();
+        if(playerStateManager.dificultad<3)
         {
-         PlayerStateManager.Instance.dificultad+=2;
+         playerStateManager.dificultad+=2;
         }else
         {
-         PlayerStateManager.Instance.dificultad+=1;
+         playerStateManager.dificultad+=1;
         }
     }
 }
